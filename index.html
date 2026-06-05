@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>subtil. — Sustainable businesses are built on solid processes</title>
+<meta name="description" content="Hands-on Lean Six Sigma consulting in Switzerland. Continuous improvement, process design, and purpose-driven brand work that compounds.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #141413;
+    --paper: #faf9f5;
+    --paper-soft: #f4f2ea;
+    --mid-gray: #b0aea5;
+    --light-gray: #e8e6dc;
+    --signal: #d97757;
+    --process: #6a9bcc;
+    --outcome: #788c5d;
+
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Lora', Georgia, serif;
+
+    --container-max: 1200px;
+    --section-y: clamp(64px, 9vw, 140px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px);
+  }
+
+  /* ============ Stacked blocks logo mark ============ */
+  .stack-mark {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 28px;
+  }
+  .stack-mark span {
+    display: block;
+    height: 6px;
+    width: 100%;
+    border-radius: 1px;
+  }
+  .stack-mark span:nth-child(1) { background: var(--outcome); }
+  .stack-mark span:nth-child(2) { background: var(--process); }
+  .stack-mark span:nth-child(3) { background: var(--signal); }
+
+  .stack-mark.lg { width: 44px; gap: 6px; }
+  .stack-mark.lg span { height: 10px; }
+
+  /* ============ Header / Nav ============ */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 249, 245, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .site-header.scrolled { border-bottom-color: var(--light-gray); }
+  .site-header.over-dark {
+    background: rgba(20, 20, 19, 0.92);
+    color: var(--paper);
+  }
+  .site-header.over-dark .lang-btn { color: var(--paper); }
+  .site-header.over-dark .lang-btn.active { color: var(--signal); }
+  .site-header.over-dark .nav-link { color: var(--paper); }
+  .site-header.over-dark .nav-cta { background: var(--signal); color: var(--ink); }
+
+  .nav-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .nav-link {
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--ink);
+    opacity: 0.78;
+    transition: opacity .2s, color .2s;
+  }
+  .nav-link:hover { opacity: 1; color: var(--signal); }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 11px 22px;
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--signal); }
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    margin-left: 12px;
+  }
+  .lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 4px;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--ink);
+    opacity: 0.5;
+    transition: opacity .2s;
+    font-weight: 600;
+  }
+  .lang-btn:hover { opacity: 1; }
+  .lang-btn.active {
+    opacity: 1;
+    color: var(--signal);
+  }
+  .lang-sep { opacity: 0.3; padding-top: 6px; }
+
+  @media (max-width: 800px) {
+    .nav-links { gap: 18px; }
+    .nav-link { display: none; }
+    .nav-link.nav-cta { display: inline-block; padding: 8px 14px; font-size: 12px; }
+  }
+  @media (max-width: 480px) {
+    .nav-link.nav-cta { display: none; }
+    .brand { font-size: 15px; }
+    .stack-mark { width: 22px; }
+    .stack-mark span { height: 5px; }
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 160px 0 var(--section-y);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 720px;
+    height: 720px;
+    background: radial-gradient(circle, rgba(217, 119, 87, 0.16) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-title {
+    font-size: clamp(44px, 9vw, 132px);
+    font-weight: 700;
+    margin-bottom: 0.3em;
+    word-break: break-word;
+  }
+  .hero-title .accent { color: var(--signal); }
+  .hero-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--mid-gray);
+    max-width: 640px;
+    line-height: 1.5;
+    margin-top: 28px;
+    margin-bottom: 48px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--signal);
+    color: var(--ink);
+    padding: 18px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform .2s, background .2s;
+  }
+  .btn-primary:hover { background: #c46847; transform: translateX(2px); }
+  .btn-primary svg { width: 16px; height: 16px; }
+
+  .btn-secondary {
+    color: var(--paper);
+    padding: 18px 32px;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--mid-gray);
+    border-radius: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-secondary:hover { border-color: var(--signal); color: var(--signal); }
+
+  /* ============ Section base ============ */
+  section {
+    padding: var(--section-y) 0;
+  }
+  .section-eyebrow {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: clamp(36px, 5vw, 64px);
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .section-title .accent { color: var(--signal); }
+  .section-lede {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    color: #5a5a55;
+    max-width: 720px;
+    margin-bottom: 64px;
+    line-height: 1.6;
+  }
+
+  /* ============ Problem section ============ */
+  .problem {
+    background: var(--paper-soft);
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .problem-card {
+    background: var(--paper);
+    border: 1px solid var(--light-gray);
+    padding: 36px 32px 32px;
+    position: relative;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .problem-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(20, 20, 19, 0.06);
+  }
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--signal);
+  }
+  .problem-card-num {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--signal);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+  .problem-card-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .problem-card-body {
+    font-size: 16px;
+    color: #555;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ============ Methodology / 3 pillars ============ */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .pillar {
+    background: var(--paper-soft);
+    padding: 48px 36px;
+    position: relative;
+    border-top: 6px solid var(--signal);
+  }
+  .pillar:nth-child(2) { border-top-color: var(--process); }
+  .pillar:nth-child(3) { border-top-color: var(--outcome); }
+  .pillar-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--signal);
+    margin-bottom: 24px;
+  }
+  .pillar:nth-child(2) .pillar-label { color: var(--process); }
+  .pillar:nth-child(3) .pillar-label { color: var(--outcome); }
+  .pillar-title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .pillar-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--signal);
+    margin-bottom: 20px;
+  }
+  .pillar:nth-child(2) .pillar-sub { color: var(--process); }
+  .pillar:nth-child(3) .pillar-sub { color: var(--outcome); }
+  .pillar-body {
+    font-size: 15.5px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ============ Services / Packages ============ */
+  .services {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .services .section-eyebrow { color: var(--signal); }
+  .services .section-lede { color: var(--mid-gray); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+  .pkg {
+    background: #1c1b1a;
+    border: 1px solid #2c2b2a;
+    padding: 32px 22px 28px;
+    position: relative;
+    transition: border-color .3s, transform .3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .pkg:hover {
+    border-color: var(--signal);
+    transform: translateY(-4px);
+  }
+  .pkg.featured {
+    border-color: var(--signal);
+    background: linear-gradient(180deg, #1c1b1a 0%, #232120 100%);
+  }
+  .pkg-badge {
+    position: absolute;
+    top: -10px;
+    left: 22px;
+    background: var(--signal);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    padding: 4px 10px;
+  }
+  .pkg-tag {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+  .pkg-name {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--paper);
+  }
+  .pkg-name .x { color: var(--signal); }
+  .pkg-subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--mid-gray);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .pkg-price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--signal);
+    margin-bottom: 4px;
+  }
+  .pkg-price .currency {
+    font-size: 14px;
+    color: var(--mid-gray);
+    margin-right: 6px;
+    vertical-align: top;
+    font-weight: 500;
+  }
+  .pkg-price-note {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+  .pkg-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    font-size: 13.5px;
+    color: var(--paper);
+    flex-grow: 1;
+  }
+  .pkg-list li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    border-bottom: 1px solid #2c2b2a;
+    line-height: 1.5;
+  }
+  .pkg-list li:last-child { border-bottom: none; }
+  .pkg-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 10px;
+    height: 2px;
+    background: var(--signal);
+  }
+  .pkg-cta {
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--signal);
+    padding-bottom: 6px;
+    align-self: flex-start;
+    transition: color .2s, padding-right .2s;
+  }
+  .pkg-cta::after {
+    content: ' →';
+    color: var(--signal);
+    transition: padding-left .2s;
+  }
+  .pkg-cta:hover { color: var(--signal); }
+  .pkg-cta:hover::after { padding-left: 6px; }
+
+  /* Subscription strip */
+  .sub-strip {
+    margin-top: 32px;
+    background: rgba(217, 119, 87, 0.08);
+    border-left: 4px solid var(--signal);
+    padding: 28px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .sub-strip-text { flex: 1; min-width: 280px; }
+  .sub-strip-text h4 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--paper);
+  }
+  .sub-strip-text p {
+    margin: 0;
+    color: var(--mid-gray);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .sub-strip-price {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--signal);
+  }
+  .sub-strip-price .currency {
+    font-size: 14px;
+    color: var(--mid-gray);
+    margin-right: 4px;
+    font-weight: 500;
+  }
+  .sub-strip-price .per {
+    font-size: 14px;
+    color: var(--mid-gray);
+    margin-left: 4px;
+    font-weight: 500;
+  }
+
+  /* ============ subtil. at Home ============ */
+  .at-home {
+    background: var(--paper);
+    position: relative;
+  }
+  .home-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
+  }
+  @media (max-width: 900px) { .home-wrap { grid-template-columns: 1fr; } }
+
+  .home-visual {
+    aspect-ratio: 4/5;
+    background: var(--paper-soft);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--light-gray);
+  }
+  .home-visual .layer {
+    position: absolute;
+    background: var(--signal);
+  }
+  .home-visual .l1 {
+    top: 10%; left: 10%; width: 70%; height: 12%;
+    opacity: 0.85;
+  }
+  .home-visual .l2 {
+    top: 28%; left: 10%; width: 55%; height: 12%;
+    background: var(--process);
+    opacity: 0.85;
+  }
+  .home-visual .l3 {
+    top: 46%; left: 10%; width: 40%; height: 12%;
+    background: var(--outcome);
+    opacity: 0.85;
+  }
+  .home-visual .l4 {
+    top: 64%; left: 10%; width: 25%; height: 12%;
+    background: var(--ink);
+  }
+  .home-visual .label {
+    position: absolute;
+    bottom: 8%; left: 10%;
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--mid-gray);
+    letter-spacing: 0.3em;
+  }
+
+  .home-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--outcome);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .home-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+  }
+  .home-title .accent { color: var(--outcome); }
+  .home-lede {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: #5a5a55;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .home-packages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+  }
+  .home-packages li {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--light-gray);
+    font-size: 15px;
+  }
+  .home-packages li:last-child { border-bottom: none; }
+  .home-packages .name {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .home-packages .desc {
+    font-style: italic;
+    color: #777;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .home-packages .price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--outcome);
+    font-size: 16px;
+    white-space: nowrap;
+    margin-left: 16px;
+  }
+
+  /* ============ About Mario ============ */
+  .about {
+    background: var(--paper-soft);
+  }
+  .about-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+  @media (max-width: 900px) { .about-wrap { grid-template-columns: 1fr; } }
+
+  .about-portrait {
+    aspect-ratio: 4/5;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-portrait::before {
+    content: 'MARIO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: clamp(60px, 12vw, 110px);
+    font-weight: 700;
+    color: var(--paper);
+    opacity: 0.06;
+    letter-spacing: 0.05em;
+  }
+  .about-portrait .mark-deco {
+    position: absolute;
+    bottom: 32px; left: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .about-portrait .mark-deco span {
+    display: block;
+    height: 14px;
+    width: 80px;
+  }
+  .about-portrait .mark-deco span:nth-child(1) { background: var(--outcome); }
+  .about-portrait .mark-deco span:nth-child(2) { background: var(--process); }
+  .about-portrait .mark-deco span:nth-child(3) { background: var(--signal); }
+
+  .about-portrait .signature {
+    position: absolute;
+    top: 32px; right: 32px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--mid-gray);
+    letter-spacing: 0.3em;
+  }
+
+  .creds {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin: 32px 0;
+  }
+  @media (max-width: 540px) { .creds { grid-template-columns: 1fr; } }
+  .cred {
+    border-left: 3px solid var(--signal);
+    padding: 6px 0 6px 16px;
+  }
+  .cred:nth-child(2) { border-left-color: var(--process); }
+  .cred:nth-child(3) { border-left-color: var(--outcome); }
+  .cred:nth-child(4) { border-left-color: var(--ink); }
+  .cred-num {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .cred-label {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 13px;
+    color: #777;
+    margin-top: 2px;
+  }
+
+  /* ============ Lead Magnet ============ */
+  .lead-magnet {
+    background: var(--signal);
+    color: var(--ink);
+  }
+  .lead-magnet-wrap {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+  @media (max-width: 800px) { .lead-magnet-wrap { grid-template-columns: 1fr; } }
+  .lead-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+  .lead-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .lead-lede {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+  .lead-form {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 36px 32px;
+  }
+  .lead-form h4 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin: 0 0 6px;
+    color: var(--paper);
+  }
+  .lead-form p {
+    color: var(--mid-gray);
+    font-style: italic;
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+  .lead-form input {
+    width: 100%;
+    background: transparent;
+    color: var(--paper);
+    border: none;
+    border-bottom: 1px solid var(--mid-gray);
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    margin-bottom: 24px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .lead-form input:focus { border-color: var(--signal); }
+  .lead-form input::placeholder { color: var(--mid-gray); font-style: italic; }
+  .lead-form button {
+    width: 100%;
+    background: var(--signal);
+    color: var(--ink);
+    border: none;
+    padding: 14px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .lead-form button:hover { background: #c46847; }
+  .lead-form .small {
+    font-size: 12px;
+    color: var(--mid-gray);
+    margin: 12px 0 0;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ============ Contact / Footer ============ */
+  .contact {
+    background: var(--ink);
+    color: var(--paper);
+    padding: var(--section-y) 0 60px;
+  }
+  .contact .section-eyebrow { color: var(--signal); }
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+  @media (max-width: 800px) { .contact-wrap { grid-template-columns: 1fr; } }
+
+  .contact-title {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .contact-title .accent { color: var(--signal); }
+
+  .contact-info {
+    margin-top: 36px;
+  }
+  .contact-info-row {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #2c2b2a;
+  }
+  .contact-info-row:last-child { border-bottom: none; }
+  .contact-info-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--mid-gray);
+    min-width: 100px;
+    padding-top: 2px;
+  }
+  .contact-info-value {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--paper);
+    line-height: 1.7;
+  }
+  .contact-info-value a { color: var(--signal); text-decoration: none; }
+  .contact-info-value a:hover { text-decoration: underline; }
+
+  /* Footer bar */
+  .footer {
+    border-top: 1px solid #2c2b2a;
+    margin-top: 80px;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--mid-gray);
+    letter-spacing: 0.05em;
+  }
+  .footer-tag {
+    font-family: var(--font-body);
+    font-style: italic;
+  }
+
+  /* ============ Language toggle ============ */
+  [data-lang="en"] .de-only,
+  [data-lang="en"] .pt-only { display: none; }
+  [data-lang="de"] .en-only,
+  [data-lang="de"] .pt-only { display: none; }
+  [data-lang="pt"] .en-only,
+  [data-lang="pt"] .de-only { display: none; }
+
+  /* ============ Reveal on scroll ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="header">
+  <div class="container">
+    <nav class="nav-wrap">
+      <a href="#top" class="brand">
+        <span class="stack-mark"><span></span><span></span><span></span></span>
+        <span>subtil<span style="color: var(--signal);">.</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#methodology" class="nav-link">
+          <span class="en-only">Methodology</span>
+          <span class="de-only">Methodik</span>
+          <span class="pt-only">Metodologia</span>
+        </a>
+        <a href="#services" class="nav-link">
+          <span class="en-only">Services</span>
+          <span class="de-only">Leistungen</span>
+          <span class="pt-only">Serviços</span>
+        </a>
+        <a href="#at-home" class="nav-link">
+          <span class="en-only">At Home</span>
+          <span class="de-only">Zuhause</span>
+          <span class="pt-only">Em Casa</span>
+        </a>
+        <a href="#about" class="nav-link">
+          <span class="en-only">About</span>
+          <span class="de-only">Über</span>
+          <span class="pt-only">Sobre</span>
+        </a>
+        <a href="#contact" class="nav-link nav-cta">
+          <span class="en-only">Talk to Mario</span>
+          <span class="de-only">Mario kontaktieren</span>
+          <span class="pt-only">Falar com o Mario</span>
+        </a>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <span class="lang-sep">·</span>
+          <button class="lang-btn" data-set-lang="de">DE</button>
+          <span class="lang-sep">·</span>
+          <button class="lang-btn" data-set-lang="pt">PT</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container">
+    <h1 class="hero-title">
+      <span class="en-only">Process. Purpose.<br><span class="accent">Performance.</span></span>
+      <span class="de-only">Prozess. Sinn.<br><span class="accent">Leistung.</span></span>
+      <span class="pt-only">Processo. Propósito.<br><span class="accent">Performance.</span></span>
+    </h1>
+    <p class="hero-sub">
+      <span class="en-only">Sustainable businesses are built on solid processes. Hands-on continuous improvement that compounds — for companies and people that want to grow without growing chaos.</span>
+      <span class="de-only">Nachhaltige Unternehmen werden auf soliden Prozessen aufgebaut. Praktische, kontinuierliche Verbesserung, die sich auszahlt — für Firmen und Menschen, die wachsen wollen, ohne im Chaos zu wachsen.</span>
+      <span class="pt-only">Negócios sustentáveis são construídos em processos sólidos. Melhoria contínua e prática que se acumula — para empresas e pessoas que querem crescer sem crescer no caos.</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#services" class="btn-primary">
+        <span class="en-only">See the packages</span>
+        <span class="de-only">Pakete ansehen</span>
+        <span class="pt-only">Ver os pacotes</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <span class="en-only">Send me a message</span>
+        <span class="de-only">Nachricht senden</span>
+        <span class="pt-only">Enviar mensagem</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-eyebrow">
+      <span class="en-only">The owner's dilemma</span>
+      <span class="de-only">Das Dilemma der Inhaber</span>
+      <span class="pt-only">O dilema do empreendedor</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="en-only">You're working <span class="accent">in</span> the business.<br>Not <span class="accent">on</span> it.</span>
+      <span class="de-only">Du arbeitest <span class="accent">im</span> Unternehmen.<br>Nicht <span class="accent">am</span> Unternehmen.</span>
+      <span class="pt-only">Trabalhas <span class="accent">no</span> negócio.<br>Não <span class="accent">no</span> desenvolvimento dele.</span>
+    </h2>
+    <p class="section-lede reveal">
+      <span class="en-only">Four signs the business runs on heroics instead of process. Each one is fixable — but not with another tool, another platform, or louder marketing.</span>
+      <span class="de-only">Vier Anzeichen, dass dein Betrieb auf Heldentaten statt auf Prozessen läuft. Jedes davon ist behebbar — aber nicht mit einem weiteren Tool, einer weiteren Plattform oder lauterem Marketing.</span>
+      <span class="pt-only">Quatro sinais de que o negócio funciona à base de heroísmo em vez de processos. Cada um tem solução — mas não com mais uma ferramenta, plataforma ou mais marketing.</span>
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-card-num">01</div>
+        <h3 class="problem-card-title">
+          <span class="en-only">Inconsistent results</span>
+          <span class="de-only">Schwankende Ergebnisse</span>
+          <span class="pt-only">Resultados inconsistentes</span>
+        </h3>
+        <p class="problem-card-body">
+          <span class="en-only">Sales spike, then dry up. Quality varies by who shows up. There's no repeatable engine — just hustle.</span>
+          <span class="de-only">Verkäufe steigen, dann brechen sie ein. Qualität hängt davon ab, wer gerade da ist. Kein wiederholbarer Motor — nur Hektik.</span>
+          <span class="pt-only">Vendas sobem, depois caem. A qualidade varia consoante quem aparece. Não há motor repetível — só esforço.</span>
+        </p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-card-num">02</div>
+        <h3 class="problem-card-title">
+          <span class="en-only">Process chaos</span>
+          <span class="de-only">Prozess-Chaos</span>
+          <span class="pt-only">Caos de processos</span>
+        </h3>
+        <p class="problem-card-body">
+          <span class="en-only">Tasks live in heads, not in systems. Onboarding takes months. Every important decision routes through the owner.</span>
+          <span class="de-only">Aufgaben leben in Köpfen, nicht in Systemen. Einarbeitung dauert Monate. Jede wichtige Entscheidung läuft über den Inhaber.</span>
+          <span class="pt-only">As tarefas vivem nas cabeças, não em sistemas. O onboarding demora meses. Cada decisão importante passa pelo dono.</span>
+        </p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-card-num">03</div>
+        <h3 class="problem-card-title">
+          <span class="en-only">Marketing that drains</span>
+          <span class="de-only">Marketing ohne Wirkung</span>
+          <span class="pt-only">Marketing que drena</span>
+        </h3>
+        <p class="problem-card-body">
+          <span class="en-only">Ads, posts, campaigns — spend goes out, leads don't come in. The story isn't anchored in a real why or a real proof.</span>
+          <span class="de-only">Anzeigen, Posts, Kampagnen — das Geld geht raus, Anfragen kommen nicht rein. Die Story ist nicht im echten Warum verankert.</span>
+          <span class="pt-only">Anúncios, posts, campanhas — o dinheiro sai, os contactos não entram. A história não está ancorada num verdadeiro porquê.</span>
+        </p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-card-num">04</div>
+        <h3 class="problem-card-title">
+          <span class="en-only">Team without direction</span>
+          <span class="de-only">Team ohne Richtung</span>
+          <span class="pt-only">Equipa sem direção</span>
+        </h3>
+        <p class="problem-card-body">
+          <span class="en-only">Nobody owns the why. Decisions stall, improvements never stick, and the same fires return every quarter.</span>
+          <span class="de-only">Niemand trägt das Warum. Entscheidungen stocken, Verbesserungen halten nicht, und dieselben Probleme kommen jedes Quartal zurück.</span>
+          <span class="pt-only">Ninguém é dono do porquê. As decisões param, as melhorias não ficam, e os mesmos problemas voltam a cada trimestre.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHODOLOGY ============ -->
+<section id="methodology">
+  <div class="container">
+    <div class="section-eyebrow">
+      <span class="en-only">The framework</span>
+      <span class="de-only">Das Rahmenwerk</span>
+      <span class="pt-only">A framework</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="en-only">Three pillars.<br><span class="accent">One integrated system.</span></span>
+      <span class="de-only">Drei Säulen.<br><span class="accent">Ein integriertes System.</span></span>
+      <span class="pt-only">Três pilares.<br><span class="accent">Um sistema integrado.</span></span>
+    </h2>
+    <p class="section-lede reveal">
+      <span class="en-only">We don't sell tactics. We connect what your business stands for, how it operates, and how the market sees it — into one system that compounds.</span>
+      <span class="de-only">Wir verkaufen keine Taktiken. Wir verbinden, wofür dein Unternehmen steht, wie es arbeitet und wie der Markt es sieht — zu einem System, das sich verstärkt.</span>
+      <span class="pt-only">Não vendemos táticas. Ligamos o que o teu negócio representa, como opera e como o mercado o vê — num sistema que se amplifica.</span>
+    </p>
+
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <div class="pillar-label">PILLAR 01</div>
+        <h3 class="pillar-title">KNOW</h3>
+        <p class="pillar-sub">
+          <span class="en-only">Discover the why.</span>
+          <span class="de-only">Das Warum entdecken.</span>
+          <span class="pt-only">Descobre o porquê.</span>
+        </p>
+        <p class="pillar-body">
+          <span class="en-only">Uncover the brand's purpose, audience, and the truth of what's actually happening inside the business today.</span>
+          <span class="de-only">Den Sinn der Marke, die Zielgruppe und die ehrliche Realität im Unternehmen aufdecken.</span>
+          <span class="pt-only">Descobrir o propósito da marca, o público e a realidade do que realmente acontece dentro do negócio hoje.</span>
+        </p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-label">PILLAR 02</div>
+        <h3 class="pillar-title">IMPROVE</h3>
+        <p class="pillar-sub">
+          <span class="en-only">Lean the process.</span>
+          <span class="de-only">Den Prozess verschlanken.</span>
+          <span class="pt-only">Lean no processo.</span>
+        </p>
+        <p class="pillar-body">
+          <span class="en-only">Map. Measure. Remove waste. Standardise what works. Build a culture of continuous improvement that survives the next hire — and the one after that.</span>
+          <span class="de-only">Erfassen. Messen. Verschwendung beseitigen. Standardisieren. Eine Kultur der kontinuierlichen Verbesserung aufbauen, die jeden Personalwechsel überlebt.</span>
+          <span class="pt-only">Mapear. Medir. Eliminar desperdício. Standardizar o que funciona. Construir uma cultura de melhoria contínua que sobrevive à próxima contratação.</span>
+        </p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-label">PILLAR 03</div>
+        <h3 class="pillar-title">ACTIVATE</h3>
+        <p class="pillar-sub">
+          <span class="en-only">Market with purpose.</span>
+          <span class="de-only">Mit Sinn vermarkten.</span>
+          <span class="pt-only">Marketing com propósito.</span>
+        </p>
+        <p class="pillar-body">
+          <span class="en-only">Translate purpose and proof-of-process into a digital presence the right buyer actually recognises. Brand, content, channels, measurement.</span>
+          <span class="de-only">Sinn und Prozess-Beweis in eine digitale Präsenz übersetzen, die der richtige Kunde wirklich erkennt. Marke, Inhalt, Kanäle, Messung.</span>
+          <span class="pt-only">Traduzir propósito e prova de processo numa presença digital que o cliente certo realmente reconhece. Marca, conteúdo, canais, medição.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES / PACKAGES ============ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-eyebrow">
+      <span class="en-only">Services for business</span>
+      <span class="de-only">Leistungen für Unternehmen</span>
+      <span class="pt-only">Serviços para empresas</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="en-only">Hands-on packages.<br><span class="accent">Real implementation.</span></span>
+      <span class="de-only">Praktische Pakete.<br><span class="accent">Echte Umsetzung.</span></span>
+      <span class="pt-only">Pacotes práticos.<br><span class="accent">Implementação real.</span></span>
+    </h2>
+    <p class="section-lede reveal">
+      <span class="en-only">Most consultants advise from the sidelines. subtil. works inside the team — analysing, implementing, and following up so improvements actually stick.</span>
+      <span class="de-only">Die meisten Berater raten von der Seitenlinie. subtil. arbeitet im Team mit — analysieren, umsetzen und nachverfolgen, damit Verbesserungen wirklich bleiben.</span>
+      <span class="pt-only">A maioria dos consultores aconselha da linha lateral. A subtil. trabalha dentro da equipa — a analisar, implementar e acompanhar para que as melhorias realmente fiquem.</span>
+    </p>
+
+    <div class="services-grid">
+
+      <!-- Flow 2x -->
+      <div class="pkg reveal">
+        <div class="pkg-tag">FLOW 2<span style="color:var(--signal)">x</span> · <span class="en-only">2 DAYS</span><span class="de-only">2 TAGE</span><span class="pt-only">2 DIAS</span></div>
+        <h3 class="pkg-name">5S Workspace</h3>
+        <p class="pkg-subtitle">
+          <span class="en-only">Sort. Set. Shine. Standardise. Sustain.</span>
+          <span class="de-only">Sortieren. Ordnen. Sauber halten. Standardisieren. Aufrechterhalten.</span>
+          <span class="pt-only">Ordenar. Organizar. Limpar. Standardizar. Sustentar.</span>
+        </p>
+        <div class="pkg-price"><span class="currency">CHF</span>1,200</div>
+        <p class="pkg-price-note"><span class="en-only">+ CHF 500 / extra day</span><span class="de-only">+ CHF 500 / extra Tag</span><span class="pt-only">+ CHF 500 / dia extra</span></p>
+        <ul class="pkg-list">
+          <li><span class="en-only">2 days on-site with your team</span><span class="de-only">2 Tage vor Ort mit dem Team</span><span class="pt-only">2 dias no local com a tua equipa</span></li>
+          <li><span class="en-only">Full 5S implementation in one work area</span><span class="de-only">Vollständige 5S-Umsetzung in einem Arbeitsbereich</span><span class="pt-only">Implementação completa do 5S numa área de trabalho</span></li>
+          <li><span class="en-only">Standards documented & team trained</span><span class="de-only">Standards dokumentiert & Team geschult</span><span class="pt-only">Standards documentados & equipa formada</span></li>
+          <li><span class="en-only">30-day check-in included</span><span class="de-only">30-Tage-Check-in inklusive</span><span class="pt-only">Check-in aos 30 dias incluído</span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">
+          <span class="en-only">Start with 5S</span>
+          <span class="de-only">Mit 5S starten</span>
+          <span class="pt-only">Começar com 5S</span>
+        </a>
+      </div>
+
+      <!-- Flow 3x -->
+      <div class="pkg reveal">
+        <div class="pkg-tag">FLOW 3<span style="color:var(--signal)">x</span> · <span class="en-only">3 DAYS</span><span class="de-only">3 TAGE</span><span class="pt-only">3 DIAS</span></div>
+        <h3 class="pkg-name">VSM Mapping</h3>
+        <p class="pkg-subtitle">
+          <span class="en-only">See the whole flow. Find where value leaks.</span>
+          <span class="de-only">Den ganzen Fluss sehen. Wertverluste finden.</span>
+          <span class="pt-only">Ver o fluxo completo. Encontrar onde o valor se perde.</span>
+        </p>
+        <div class="pkg-price"><span class="currency">CHF</span>1,800</div>
+        <p class="pkg-price-note"><span class="en-only">+ CHF 500 / extra day</span><span class="de-only">+ CHF 500 / extra Tag</span><span class="pt-only">+ CHF 500 / dia extra</span></p>
+        <ul class="pkg-list">
+          <li><span class="en-only">Value Stream Map of one core process</span><span class="de-only">Value Stream Map eines Kernprozesses</span><span class="pt-only">Value Stream Map de um processo-chave</span></li>
+          <li><span class="en-only">Current state + future state mapped</span><span class="de-only">Ist-Zustand + Soll-Zustand abgebildet</span><span class="pt-only">Estado atual + estado futuro mapeados</span></li>
+          <li><span class="en-only">Quick-win list, prioritised by impact</span><span class="de-only">Quick-Win-Liste, nach Wirkung priorisiert</span><span class="pt-only">Lista de quick-wins, priorizados por impacto</span></li>
+          <li><span class="en-only">90-day improvement roadmap</span><span class="de-only">90-Tage-Verbesserungs-Roadmap</span><span class="pt-only">Roadmap de melhoria de 90 dias</span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">
+          <span class="en-only">Map the flow</span>
+          <span class="de-only">Den Fluss erfassen</span>
+          <span class="pt-only">Mapear o fluxo</span>
+        </a>
+      </div>
+
+      <!-- Flow 5x — RECOMMENDED -->
+      <div class="pkg featured reveal">
+        <div class="pkg-badge">
+          <span class="en-only">RECOMMENDED</span>
+          <span class="de-only">EMPFOHLEN</span>
+          <span class="pt-only">RECOMENDADO</span>
+        </div>
+        <div class="pkg-tag">FLOW 5<span style="color:var(--signal)">x</span> · <span class="en-only">5 DAYS</span><span class="de-only">5 TAGE</span><span class="pt-only">5 DIAS</span></div>
+        <h3 class="pkg-name">Kaizen Event</h3>
+        <p class="pkg-subtitle">
+          <span class="en-only">A full week of focused improvement.</span>
+          <span class="de-only">Eine ganze Woche fokussierte Verbesserung.</span>
+          <span class="pt-only">Uma semana inteira de melhoria focada.</span>
+        </p>
+        <div class="pkg-price"><span class="currency">CHF</span>3,000</div>
+        <p class="pkg-price-note"><span class="en-only">+ CHF 500 / extra day</span><span class="de-only">+ CHF 500 / extra Tag</span><span class="pt-only">+ CHF 500 / dia extra</span></p>
+        <ul class="pkg-list">
+          <li><span class="en-only">Pre-event charter, scope, stakeholder map</span><span class="de-only">Vor-Event-Charter, Scope, Stakeholder-Map</span><span class="pt-only">Charter pré-evento, scope, mapa de stakeholders</span></li>
+          <li><span class="en-only">5 days hands-on with cross-functional team</span><span class="de-only">5 Tage praktisch mit funktionsübergreifendem Team</span><span class="pt-only">5 dias práticos com equipa multifuncional</span></li>
+          <li><span class="en-only">Root-cause analysis & countermeasures</span><span class="de-only">Ursachenanalyse & Gegenmaßnahmen</span><span class="pt-only">Análise de causa-raiz & contramedidas</span></li>
+          <li><span class="en-only">A3 report + metrics + sustainability plan</span><span class="de-only">A3-Report + Kennzahlen + Nachhaltigkeitsplan</span><span class="pt-only">Relatório A3 + métricas + plano de sustentabilidade</span></li>
+          <li><span class="en-only">Two follow-up sessions in the next 90 days</span><span class="de-only">Zwei Folgesitzungen in den nächsten 90 Tagen</span><span class="pt-only">Duas sessões de acompanhamento nos próximos 90 dias</span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">
+          <span class="en-only">Run a Kaizen</span>
+          <span class="de-only">Kaizen durchführen</span>
+          <span class="pt-only">Fazer um Kaizen</span>
+        </a>
+      </div>
+
+      <!-- Flow 12x -->
+      <div class="pkg reveal">
+        <div class="pkg-tag">FLOW 12<span style="color:var(--signal)">x</span> · <span class="en-only">4–6 WEEKS</span><span class="de-only">4–6 WOCHEN</span><span class="pt-only">4–6 SEMANAS</span></div>
+        <h3 class="pkg-name">Transformation</h3>
+        <p class="pkg-subtitle">
+          <span class="en-only">An embedded engagement that changes how the company runs.</span>
+          <span class="de-only">Ein eingebettetes Mandat, das verändert, wie das Unternehmen läuft.</span>
+          <span class="pt-only">Um envolvimento integrado que muda como a empresa funciona.</span>
+        </p>
+        <div class="pkg-price"><span class="currency">CHF</span>9,800</div>
+        <p class="pkg-price-note">
+          <span class="en-only">12 days spread over 4–6 weeks</span>
+          <span class="de-only">12 Tage verteilt auf 4–6 Wochen</span>
+          <span class="pt-only">12 dias distribuídos em 4–6 semanas</span>
+        </p>
+        <ul class="pkg-list">
+          <li><span class="en-only">Diagnostic phase: where you actually are</span><span class="de-only">Diagnosephase: wo ihr wirklich steht</span><span class="pt-only">Fase de diagnóstico: onde realmente estão</span></li>
+          <li><span class="en-only">Process redesign across 2–3 core flows</span><span class="de-only">Prozess-Redesign in 2–3 Kernprozessen</span><span class="pt-only">Redesign de processos em 2–3 fluxos-chave</span></li>
+          <li><span class="en-only">Brand & digital marketing alignment</span><span class="de-only">Marken- & Digital-Marketing-Ausrichtung</span><span class="pt-only">Alinhamento de marca & marketing digital</span></li>
+          <li><span class="en-only">Team capability building (the why, the how)</span><span class="de-only">Team-Kompetenzaufbau (das Warum, das Wie)</span><span class="pt-only">Desenvolvimento de capacidades da equipa</span></li>
+          <li><span class="en-only">Quarterly review for 12 months included</span><span class="de-only">Quartalsreview für 12 Monate inklusive</span><span class="pt-only">Revisão trimestral durante 12 meses incluída</span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">
+          <span class="en-only">Plan a transformation</span>
+          <span class="de-only">Transformation planen</span>
+          <span class="pt-only">Planear uma transformação</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Subscription strip -->
+    <div class="sub-strip reveal">
+      <div class="sub-strip-text">
+        <h4>
+          <span class="en-only">Steady — ongoing support</span>
+          <span class="de-only">Steady — laufende Begleitung</span>
+          <span class="pt-only">Steady — apoio contínuo</span>
+        </h4>
+        <p>
+          <span class="en-only">Quarterly visits, unlimited email follow-up, and a standing 10% discount on any new project. For owners who want a continuous improvement partner, not a one-off project.</span>
+          <span class="de-only">Quartalsbesuche, unbegrenzte E-Mail-Begleitung und ein fester 10% Rabatt auf jedes neue Projekt. Für Inhaber, die einen kontinuierlichen Verbesserungs-Partner suchen.</span>
+          <span class="pt-only">Visitas trimestrais, acompanhamento por email ilimitado e 10% de desconto permanente em qualquer novo projeto. Para donos que querem um parceiro de melhoria contínua, não um projeto pontual.</span>
+        </p>
+      </div>
+      <div class="sub-strip-price">
+        <span class="currency">CHF</span>1,500<span class="per"><span class="en-only">/year</span><span class="de-only">/Jahr</span><span class="pt-only">/ano</span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ subtil. AT HOME ============ -->
+<section class="at-home" id="at-home">
+  <div class="container">
+    <div class="home-wrap">
+      <div class="home-visual" aria-hidden="true">
+        <div class="layer l1"></div>
+        <div class="layer l2"></div>
+        <div class="layer l3"></div>
+        <div class="layer l4"></div>
+        <div class="label">SORT · SET · SHINE · STANDARDISE · SUSTAIN</div>
+      </div>
+      <div class="home-content">
+        <div class="home-eyebrow">
+          <span class="en-only">subtil. at Home</span>
+          <span class="de-only">subtil. zuhause</span>
+          <span class="pt-only">subtil. em casa</span>
+        </div>
+        <h2 class="home-title">
+          <span class="en-only">Same method.<br><span class="accent">Personal scale.</span></span>
+          <span class="de-only">Gleiche Methode.<br><span class="accent">Persönlicher Maßstab.</span></span>
+          <span class="pt-only">Mesmo método.<br><span class="accent">Escala pessoal.</span></span>
+        </h2>
+        <p class="home-lede">
+          <span class="en-only">The 5S methodology that organises factory floors also organises homes. Private, discreet, in-person — for individuals who want order that actually lasts. Available in Switzerland — Zürich, Zug, Luzern and Liechtenstein; Portugal — Lisboa, Cascais, Margem Sul.</span>
+          <span class="de-only">Die 5S-Methodik, die Fabrikhallen organisiert, organisiert auch Zuhause. Privat, diskret, persönlich — für Einzelpersonen, die echte, bleibende Ordnung wollen. Verfügbar in der Schweiz — Zürich, Zug, Luzern und Liechtenstein; Portugal — Lissabon, Cascais, Margem Sul.</span>
+          <span class="pt-only">A metodologia 5S que organiza chões de fábrica também organiza casas. Privado, discreto, presencial — para indivíduos que querem ordem que realmente dura. Disponível na Suíça — Zürich, Zug, Luzern e Liechtenstein; Portugal — Lisboa, Cascais, Margem Sul.</span>
+        </p>
+
+        <ul class="home-packages">
+          <li>
+            <div>
+              <div class="name">
+                <span class="en-only">Discovery</span><span class="de-only">Erstgespräch</span><span class="pt-only">Discovery</span>
+              </div>
+              <div class="desc">
+                <span class="en-only">1h on-site assessment + tailored plan</span>
+                <span class="de-only">1h Bestandsaufnahme vor Ort + Plan</span>
+                <span class="pt-only">Avaliação de 1h no local + plano personalizado</span>
+              </div>
+            </div>
+            <div class="price">CHF 100</div>
+          </li>
+          <li>
+            <div>
+              <div class="name">
+                <span class="en-only">Half-day session</span><span class="de-only">Halbtages-Session</span><span class="pt-only">Meio-dia</span>
+              </div>
+              <div class="desc">
+                <span class="en-only">4h focused work on one room or area</span>
+                <span class="de-only">4h fokussiert in einem Raum oder Bereich</span>
+                <span class="pt-only">4h de trabalho focado num quarto ou área</span>
+              </div>
+            </div>
+            <div class="price">CHF 380</div>
+          </li>
+          <li>
+            <div>
+              <div class="name">
+                <span class="en-only">Full day</span><span class="de-only">Ganztag</span><span class="pt-only">Dia completo</span>
+              </div>
+              <div class="desc">
+                <span class="en-only">8h, multiple rooms, materials guidance</span>
+                <span class="de-only">8h, mehrere Räume, Materialberatung</span>
+                <span class="pt-only">8h, vários quartos, orientação de materiais</span>
+              </div>
+            </div>
+            <div class="price">CHF 720</div>
+          </li>
+          <li>
+            <div>
+              <div class="name">
+                <span class="en-only">Premium package</span><span class="de-only">Premium-Paket</span><span class="pt-only">Pacote Premium</span>
+              </div>
+              <div class="desc">
+                <span class="en-only">2 days hands-on working, follow-up after 30 days</span>
+                <span class="de-only">2 Tage praktische Arbeit, Nachbetreuung nach 30 Tagen</span>
+                <span class="pt-only">2 dias de trabalho prático, acompanhamento após 30 dias</span>
+              </div>
+            </div>
+            <div class="price">CHF 1,400+</div>
+          </li>
+        </ul>
+
+        <a href="#contact" class="btn-primary" style="background: var(--outcome);">
+          <span class="en-only">Book a Discovery</span>
+          <span class="de-only">Erstgespräch buchen</span>
+          <span class="pt-only">Marcar um Discovery</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT MARIO ============ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-wrap">
+
+      <div class="about-portrait">
+        <div class="signature">FOUNDER · CONSULTANT</div>
+        <div class="mark-deco">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="section-eyebrow">
+          <span class="en-only">About Mario</span>
+          <span class="de-only">Über Mario</span>
+          <span class="pt-only">Sobre o Mario</span>
+        </div>
+        <h2 class="section-title reveal">
+          <span class="en-only">A decade of continuous improvement —<br><span class="accent">from global F&B to Swiss robotics.</span></span>
+          <span class="de-only">Ein Jahrzehnt kontinuierlicher Verbesserung —<br><span class="accent">von globaler F&B zu Schweizer Robotik.</span></span>
+          <span class="pt-only">Uma década de melhoria contínua —<br><span class="accent">de F&B global a robótica suíça.</span></span>
+        </h2>
+        <p style="font-style: italic; color: #5a5a55; font-size: 17px; line-height: 1.65; margin-bottom: 0;">
+          <span class="en-only">I'm Mario Afonso, a Lean Six Sigma Green Belt with over 10 years inside operations — 8 of them at one of the world's largest food & beverage groups, the last two in Switzerland with a robotics startup driving food & beverage innovation. Throughout, my focus has been the same: continuous improvement, clean processes, and standards that scale beyond any one person. I don't advise from the sidelines. I work inside the team, with the team, until the improvement is real and the team owns it.</span>
+          <span class="de-only">Ich bin Mario Afonso, Lean Six Sigma Green Belt mit über 10 Jahren in Operations — 8 davon bei einem der weltweit grössten Food & Beverage-Konzerne, die letzten zwei in der Schweiz bei einem Robotik-Startup, das Innovation in Food & Beverage vorantreibt. Mein Fokus war immer derselbe: kontinuierliche Verbesserung, saubere Prozesse, und Standards, die über jede einzelne Person hinaus skalieren. Ich berate nicht von der Seitenlinie. Ich arbeite im Team, mit dem Team, bis die Verbesserung echt ist und das Team sie trägt.</span>
+          <span class="pt-only">Sou o Mario Afonso, Green Belt de Lean Six Sigma com mais de 10 anos em operações — 8 deles num dos maiores grupos de food & beverage do mundo, os últimos dois na Suíça numa startup de robótica a impulsionar inovação em F&B. Durante todo este tempo, o foco foi sempre o mesmo: melhoria contínua, processos limpos e standards que escalam além de qualquer pessoa. Não aconselho da linha lateral. Trabalho dentro da equipa, com a equipa, até a melhoria ser real e a equipa a dominar.</span>
+        </p>
+
+        <div class="creds">
+          <div class="cred">
+            <div class="cred-num">10+</div>
+            <div class="cred-label">
+              <span class="en-only">Years in operations</span>
+              <span class="de-only">Jahre in Operations</span>
+              <span class="pt-only">Anos em operações</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-num">LSS</div>
+            <div class="cred-label">
+              <span class="en-only">Six Sigma Green Belt</span>
+              <span class="de-only">Six Sigma Green Belt</span>
+              <span class="pt-only">Six Sigma Green Belt</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-num">F&amp;B</div>
+            <div class="cred-label">
+              <span class="en-only">Multinational background</span>
+              <span class="de-only">Multinationale Erfahrung</span>
+              <span class="pt-only">Experiência multinacional</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-num">CH</div>
+            <div class="cred-label">
+              <span class="en-only">Based in Switzerland</span>
+              <span class="de-only">Basis in der Schweiz</span>
+              <span class="pt-only">Baseado na Suíça</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEAD MAGNET ============ -->
+<section class="lead-magnet" id="audit">
+  <div class="container">
+    <div class="lead-magnet-wrap">
+      <div>
+        <div class="lead-eyebrow">
+          <span class="en-only">Free resource</span>
+          <span class="de-only">Kostenlose Ressource</span>
+          <span class="pt-only">Recurso gratuito</span>
+        </div>
+        <h2 class="lead-title">
+          <span class="en-only">The 1-hour<br>Process Audit.</span>
+          <span class="de-only">Der 1-Stunden-<br>Prozess-Audit.</span>
+          <span class="pt-only">A Auditoria de<br>Processo de 1 hora.</span>
+        </h2>
+        <p class="lead-lede">
+          <span class="en-only">A 12-question diagnostic you can run on your business before your next coffee. Find the three biggest waste spots in your operations — no consultant required.</span>
+          <span class="de-only">Eine 12-Fragen-Diagnose, die du vor dem nächsten Kaffee laufen lassen kannst. Finde die drei grössten Verschwendungsbereiche in deinem Betrieb — ohne Berater.</span>
+          <span class="pt-only">Um diagnóstico de 12 perguntas que podes fazer ao teu negócio antes do próximo café. Encontra os três maiores pontos de desperdício nas tuas operações — sem consultor.</span>
+        </p>
+      </div>
+
+      <form class="lead-form" onsubmit="event.preventDefault(); alert(document.documentElement.dataset.lang === 'de' ? 'Danke! Der Audit-PDF wird an deine E-Mail geschickt.' : document.documentElement.dataset.lang === 'pt' ? 'Obrigado! O PDF do audit está a caminho.' : 'Thanks! The audit PDF is on its way to your inbox.');">
+        <h4>
+          <span class="en-only">Get the PDF</span>
+          <span class="de-only">Hol dir das PDF</span>
+          <span class="pt-only">Receber o PDF</span>
+        </h4>
+        <p>
+          <span class="en-only">No spam, no list-trading. Just the audit.</span>
+          <span class="de-only">Kein Spam, kein Listenhandel. Nur der Audit.</span>
+          <span class="pt-only">Sem spam. O audit, só isso.</span>
+        </p>
+        <input type="text" placeholder="" data-placeholder-en="Your name" data-placeholder-de="Dein Name" data-placeholder-pt="O teu nome" required>
+        <input type="email" placeholder="" data-placeholder-en="Your email" data-placeholder-de="Deine E-Mail" data-placeholder-pt="O teu email" required>
+        <button type="submit">
+          <span class="en-only">SEND ME THE AUDIT</span>
+          <span class="de-only">AUDIT ZUSCHICKEN</span>
+          <span class="pt-only">ENVIAR O AUDIT</span>
+        </button>
+        <p class="small">
+          <span class="en-only">One email. Unsubscribe anytime.</span>
+          <span class="de-only">Eine E-Mail. Jederzeit abbestellbar.</span>
+          <span class="pt-only">Um email. Cancela a qualquer momento.</span>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+
+      <div>
+        <div class="section-eyebrow">
+          <span class="en-only">Let's talk</span>
+          <span class="de-only">Lass uns reden</span>
+          <span class="pt-only">Vamos falar</span>
+        </div>
+        <h2 class="contact-title">
+          <span class="en-only">Diagnose. Design.<br><span class="accent">Deliver.</span></span>
+          <span class="de-only">Diagnose. Design.<br><span class="accent">Umsetzung.</span></span>
+          <span class="pt-only">Diagnóstico. Design.<br><span class="accent">Entrega.</span></span>
+        </h2>
+        <p style="color: var(--mid-gray); font-style: italic; font-size: 18px; max-width: 540px;">
+          <span class="en-only">A short, focused 30-minute call to understand your real bottlenecks and decide if subtil. is the right fit. No pitch, no pressure — just an honest conversation.</span>
+          <span class="de-only">Ein kurzes, fokussiertes 30-Minuten-Gespräch, um deine echten Engpässe zu verstehen und zu entscheiden, ob subtil. passt. Kein Pitch, kein Druck — nur ein ehrliches Gespräch.</span>
+          <span class="pt-only">Uma chamada curta e focada de 30 minutos para entender os teus verdadeiros pontos de estrangulamento e decidir se a subtil. é a escolha certa. Sem pitch, sem pressão — apenas uma conversa honesta.</span>
+        </p>
+
+        <div class="contact-info">
+          <div class="contact-info-row">
+            <div class="contact-info-label">EMAIL</div>
+            <div class="contact-info-value"><a href="mailto:mario@subtil.ch">mario@subtil.ch</a></div>
+          </div>
+          <div class="contact-info-row">
+            <div class="contact-info-label">
+              <span class="en-only">PHONE</span><span class="de-only">TELEFON</span><span class="pt-only">TELEFONE</span>
+            </div>
+            <div class="contact-info-value">+41 — — —</div>
+          </div>
+          <div class="contact-info-row">
+            <div class="contact-info-label">
+              <span class="en-only">BASE</span><span class="de-only">STANDORT</span><span class="pt-only">BASE</span>
+            </div>
+            <div class="contact-info-value">
+              <span class="en-only">Villigen, Aargau · Switzerland<br>Sesimbra, Setúbal · Portugal</span>
+              <span class="de-only">Villigen, Aargau · Schweiz<br>Sesimbra, Setúbal · Portugal</span>
+              <span class="pt-only">Villigen, Aargau · Suíça<br>Sesimbra, Setúbal · Portugal</span>
+            </div>
+          </div>
+          <div class="contact-info-row">
+            <div class="contact-info-label">
+              <span class="en-only">SERVES</span><span class="de-only">EINSATZ</span><span class="pt-only">SERVE</span>
+            </div>
+            <div class="contact-info-value">
+              <span class="en-only">Zürich · Zug · Luzern · Aargau · Liechtenstein<br>Lisboa · Cascais · Margem Sul</span>
+              <span class="de-only">Zürich · Zug · Luzern · Aargau · Liechtenstein<br>Lissabon · Cascais · Margem Sul</span>
+              <span class="pt-only">Zürich · Zug · Luzern · Aargau · Liechtenstein<br>Lisboa · Cascais · Margem Sul</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="lead-form" style="background: #1c1b1a;" onsubmit="event.preventDefault(); alert(document.documentElement.dataset.lang === 'de' ? 'Danke — Mario meldet sich innerhalb von 24h.' : document.documentElement.dataset.lang === 'pt' ? 'Obrigado — o Mario entrará em contacto em 24 horas.' : 'Thanks — Mario will be in touch within 24 hours.');">
+        <h4>
+          <span class="en-only">Book your call</span>
+          <span class="de-only">Termin buchen</span>
+          <span class="pt-only">Marcar a chamada</span>
+        </h4>
+        <p>
+          <span class="en-only">A reply within 24 hours, guaranteed.</span>
+          <span class="de-only">Antwort innerhalb von 24 Stunden, garantiert.</span>
+          <span class="pt-only">Resposta em 24 horas, garantido.</span>
+        </p>
+        <input type="text" data-placeholder-en="Your name" data-placeholder-de="Dein Name" data-placeholder-pt="O teu nome" required>
+        <input type="email" data-placeholder-en="Email" data-placeholder-de="E-Mail" data-placeholder-pt="Email" required>
+        <input type="text" data-placeholder-en="Company (optional)" data-placeholder-de="Firma (optional)" data-placeholder-pt="Empresa (opcional)">
+        <button type="submit">
+          <span class="en-only">REQUEST CALL</span>
+          <span class="de-only">GESPRÄCH ANFRAGEN</span>
+          <span class="pt-only">PEDIR CHAMADA</span>
+        </button>
+      </form>
+
+    </div>
+
+    <div class="footer">
+      <div class="brand" style="color: var(--paper);">
+        <span class="stack-mark"><span></span><span></span><span></span></span>
+        <span>subtil<span style="color: var(--signal);">.</span></span>
+      </div>
+      <div class="footer-tag">
+        <span class="en-only">Sustainable by design. © 2026</span>
+        <span class="de-only">Nachhaltig im Design. © 2026</span>
+        <span class="pt-only">Sustentável por design. © 2026</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Language toggle
+  document.querySelectorAll('[data-set-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.setLang;
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.setLang === lang));
+      // Update input placeholders
+      document.querySelectorAll('input[data-placeholder-en]').forEach(i => {
+        if (lang === 'de') i.placeholder = i.dataset.placeholderDe || '';
+        else if (lang === 'pt') i.placeholder = i.dataset.placeholderPt || '';
+        else i.placeholder = i.dataset.placeholderEn || '';
+      });
+    });
+  });
+  // Initialize placeholders
+  document.querySelectorAll('input[data-placeholder-en]').forEach(i => {
+    i.placeholder = i.dataset.placeholderEn;
+  });
+
+  // Sticky header background + over-dark detection
+  const header = document.getElementById('header');
+  const darkSections = document.querySelectorAll('.hero, .services, .contact');
+
+  function updateHeader() {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 20);
+
+    const headerBottom = 72;
+    let overDark = false;
+    darkSections.forEach(sec => {
+      const r = sec.getBoundingClientRect();
+      if (r.top < headerBottom && r.bottom > 0) overDark = true;
+    });
+    header.classList.toggle('over-dark', overDark);
+  }
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
