@@ -930,6 +930,89 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* ============ Story expand/collapse ============ */
+  .story-para {
+    font-style: italic;
+    color: #5a5a55;
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 1em;
+  }
+  .story-tagline {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin-bottom: 0;
+    letter-spacing: -0.01em;
+  }
+  .read-more-btn {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--signal);
+    padding: 6px 0;
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: color .2s;
+    display: inline-block;
+  }
+  .read-more-btn:hover { color: var(--signal); }
+  .read-more-btn .btn-less { display: none; }
+  .read-more-btn[data-expanded="true"] .btn-more { display: none; }
+  .read-more-btn[data-expanded="true"] .btn-less { display: inline; }
+  .story-full {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1.1s ease;
+  }
+  .story-full.expanded { max-height: 5000px; }
+  .story-section {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--light-gray);
+  }
+  .story-section:first-child {
+    margin-top: 28px;
+    border-top: 2px solid var(--signal);
+  }
+  .story-h4 {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .story-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+  .story-list li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    font-style: italic;
+    font-size: 15.5px;
+    color: #5a5a55;
+    border-bottom: 1px solid var(--light-gray);
+    line-height: 1.5;
+  }
+  .story-list li:last-child { border-bottom: none; }
+  .story-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 15px;
+    width: 10px; height: 2px;
+    background: var(--signal);
+  }
 </style>
 </head>
 <body>
@@ -1421,11 +1504,89 @@
           <span class="de-only">Ein Jahrzehnt kontinuierlicher Verbesserung —<br><span class="accent">von globaler F&B zu Schweizer Robotik.</span></span>
           <span class="pt-only">Uma década de melhoria contínua —<br><span class="accent">de F&B global a robótica suíça.</span></span>
         </h2>
-        <p style="font-style: italic; color: #5a5a55; font-size: 17px; line-height: 1.65; margin-bottom: 0;">
-          <span class="en-only">I'm Mario Afonso, a Lean Six Sigma Green Belt with over 10 years inside operations — 8 of them at one of the world's largest food & beverage groups, the last two in Switzerland with a robotics startup driving food & beverage innovation. Throughout, my focus has been the same: continuous improvement, clean processes, and standards that scale beyond any one person. I don't advise from the sidelines. I work inside the team, with the team, until the improvement is real and the team owns it.</span>
-          <span class="de-only">Ich bin Mario Afonso, Lean Six Sigma Green Belt mit über 10 Jahren in Operations — 8 davon bei einem der weltweit grössten Food & Beverage-Konzerne, die letzten zwei in der Schweiz bei einem Robotik-Startup, das Innovation in Food & Beverage vorantreibt. Mein Fokus war immer derselbe: kontinuierliche Verbesserung, saubere Prozesse, und Standards, die über jede einzelne Person hinaus skalieren. Ich berate nicht von der Seitenlinie. Ich arbeite im Team, mit dem Team, bis die Verbesserung echt ist und das Team sie trägt.</span>
-          <span class="pt-only">Sou o Mario Afonso, Green Belt de Lean Six Sigma com mais de 10 anos em operações — 8 deles num dos maiores grupos de food & beverage do mundo, os últimos dois na Suíça numa startup de robótica a impulsionar inovação em F&B. Durante todo este tempo, o foco foi sempre o mesmo: melhoria contínua, processos limpos e standards que escalam além de qualquer pessoa. Não aconselho da linha lateral. Trabalho dentro da equipa, com a equipa, até a melhoria ser real e a equipa a dominar.</span>
-        </p>
+        <!-- Short story -->
+        <div class="story-short">
+          <p class="story-para">
+            <span class="en-only">I grew up in a village in Portugal, trained as an actor, and started my career fixing machines with my hands. Not the typical consulting background — and that's exactly the point.</span>
+            <span class="de-only">Ich bin in einem Dorf in Portugal aufgewachsen, habe Schauspielerei studiert und meine Karriere mit dem Reparieren von Maschinen per Hand begonnen. Kein typischer Consulting-Hintergrund — und genau das ist der Punkt.</span>
+            <span class="pt-only">Cresci numa aldeia em Portugal, estudei teatro e comecei a minha carreira a reparar máquinas com as mãos. Não é o percurso típico de um consultor — e é exatamente esse o ponto.</span>
+          </p>
+          <p class="story-para">
+            <span class="en-only">Theatre gave me self-awareness. Sport gave me discipline. A decade inside operations — from a local workshop to one of the world's largest food &amp; beverage groups, then to a Swiss robotics startup — gave me proof: continuous improvement isn't a methodology. It's a way of seeing the world.</span>
+            <span class="de-only">Theater gab mir Selbstwahrnehmung. Sport gab mir Disziplin. Ein Jahrzehnt in Operations — von einer lokalen Werkstatt zu einer der weltgrössten Food &amp; Beverage-Gruppen, dann zu einem Schweizer Robotik-Startup — gab mir den Beweis: Kontinuierliche Verbesserung ist keine Methodik. Es ist eine Art, die Welt zu sehen.</span>
+            <span class="pt-only">O teatro deu-me autoconhecimento. O desporto deu-me disciplina. Uma década dentro de operações — de uma oficina local a um dos maiores grupos de food &amp; beverage do mundo, depois a uma startup de robótica na Suíça — deu-me a prova: a melhoria contínua não é uma metodologia. É uma forma de ver o mundo.</span>
+          </p>
+          <p class="story-para">
+            <span class="en-only">Every team I've joined, I've left more capable. Every process I've touched, I've left sharper. Every room I've walked into, I've asked the same question — <em>what's broken here, and how do we fix it for good?</em></span>
+            <span class="de-only">Jedes Team, dem ich beigetreten bin, habe ich fähiger hinterlassen. Jeden Prozess, den ich berührt habe, habe ich schärfer hinterlassen. In jedem Raum stellte ich dieselbe Frage — <em>was ist hier kaputt, und wie beheben wir es dauerhaft?</em></span>
+            <span class="pt-only">Cada equipa em que entrei, deixei mais capaz. Cada processo que toquei, deixei mais afinado. Cada sala onde entrei, fiz sempre a mesma pergunta — <em>o que está partido aqui, e como o corrigimos de vez?</em></span>
+          </p>
+          <p class="story-para story-tagline">
+            <span class="en-only">subtil. is that question, made available to your business.</span>
+            <span class="de-only">subtil. ist diese Frage — für dein Unternehmen verfügbar.</span>
+            <span class="pt-only">A subtil. é essa pergunta, disponível para o teu negócio.</span>
+          </p>
+        </div>
+
+        <!-- Read more button -->
+        <button class="read-more-btn" data-expanded="false" onclick="toggleStory(this)">
+          <span class="btn-more">
+            <span class="en-only">Read my full story →</span>
+            <span class="de-only">Meine ganze Geschichte lesen →</span>
+            <span class="pt-only">Ler a minha história completa →</span>
+          </span>
+          <span class="btn-less">
+            <span class="en-only">↑ Read less</span>
+            <span class="de-only">↑ Weniger lesen</span>
+            <span class="pt-only">↑ Ler menos</span>
+          </span>
+        </button>
+
+        <!-- Full story (collapsed by default) -->
+        <div class="story-full" id="story-full">
+
+          <div class="story-section">
+            <div class="story-h4"><span class="en-only">The thread</span><span class="de-only">Der Faden</span><span class="pt-only">O fio condutor</span></div>
+            <p class="story-para"><span class="en-only">I grew up in a village in Portugal, where the land teaches you something no classroom can: things don't improve on their own. You have to show up, pay attention, and do the work.</span><span class="de-only">Ich bin in einem Dorf in Portugal aufgewachsen — dort, wo das Land einem etwas beibringt, das kein Klassenzimmer kann: Dinge verbessern sich nicht von allein. Man muss präsent sein, aufmerksam und bereit zu arbeiten.</span><span class="pt-only">Cresci numa aldeia em Portugal, onde a terra ensina algo que nenhuma sala de aula consegue: as coisas não melhoram sozinhas. É preciso aparecer, prestar atenção e trabalhar.</span></p>
+            <p class="story-para"><span class="en-only">Sport shaped me early — football, bodyboard, surfing as a teenager. Later, running and cycling. Eventually, the mountains became my home: trail running, skiing, long climbs on a road bike. Whatever the challenge, the lesson was the same. The gap between where you are and where you want to be is always closeable. It just takes method, honesty, and the willingness to be uncomfortable.</span><span class="de-only">Sport hat mich früh geprägt — Fussball, Bodyboard, Surfen als Teenager. Später Laufen und Radfahren. Irgendwann wurden die Berge mein Zuhause: Trailrunning, Skifahren, lange Anstiege auf dem Rennrad. Was auch immer die Herausforderung war — die Lektion blieb dieselbe. Der Abstand zwischen dem, wo man ist, und dem, wo man sein will, lässt sich immer schliessen. Es braucht Methode, Ehrlichkeit und die Bereitschaft, sich unwohl zu fühlen.</span><span class="pt-only">O desporto moldou-me cedo — futebol, bodyboard, surf na adolescência. Mais tarde, corrida e ciclismo. Com o tempo, as montanhas tornaram-se a minha casa: trail running, ski, longas subidas de bicicleta de estrada. Qualquer que fosse o desafio, a lição era sempre a mesma. A distância entre onde se está e onde se quer estar é sempre possível de fechar. Basta método, honestidade e vontade de estar desconfortável.</span></p>
+          </div>
+
+          <div class="story-section">
+            <div class="story-h4"><span class="en-only">The unexpected foundation</span><span class="de-only">Die unerwartete Grundlage</span><span class="pt-only">A base inesperada</span></div>
+            <p class="story-para"><span class="en-only">Before I became a consultant, I trained to be an actor.</span><span class="de-only">Bevor ich Berater wurde, studierte ich Schauspielerei.</span><span class="pt-only">Antes de me tornar consultor, estudei teatro.</span></p>
+            <p class="story-para"><span class="en-only">I studied Communication and Interpretation in Portugal, and what that gave me wasn't a stage career — it gave me something rarer: <strong>the discipline of radical self-awareness.</strong> To play a character convincingly, you first have to understand yourself completely. You strip everything back. You question every habit, every assumption. You look at yourself without comfort.</span><span class="de-only">Ich studierte Kommunikation und Interpretation in Portugal — das gab mir keine Bühnenkarriere, sondern etwas Selteneres: <strong>die Disziplin der radikalen Selbstwahrnehmung.</strong> Um eine Rolle überzeugend zu spielen, muss man sich selbst vollständig verstehen. Man streift alles ab. Hinterfragt jede Gewohnheit, jede Annahme.</span><span class="pt-only">Estudei Comunicação e Interpretação em Portugal, e o que isso me deu não foi uma carreira em palco — deu-me algo mais raro: <strong>a disciplina da autoconsciência radical.</strong> Para interpretar uma personagem de forma convincente, tens primeiro de te compreender completamente. Despessoalizas-te. Questionas cada hábito, cada pressuposto.</span></p>
+            <p class="story-para"><span class="en-only">That practice — of looking inward, noticing what's broken, and choosing to fix it rather than ignore it — never left me. It became the lens through which I see organisations, teams, and processes. What I discovered on stage, I later applied everywhere else.</span><span class="de-only">Diese Praxis — nach innen zu schauen, zu bemerken, was kaputt ist, und es zu reparieren statt zu ignorieren — hat mich nie verlassen. Sie wurde zur Linse, durch die ich Organisationen, Teams und Prozesse sehe. Was ich auf der Bühne entdeckte, wendete ich später überall an.</span><span class="pt-only">Essa prática — de olhar para dentro, de notar o que está partido e escolher reparar em vez de ignorar — nunca me abandonou. Tornou-se a lente através da qual vejo organizações, equipas e processos. O que descobri em palco, apliquei mais tarde em todo o lado.</span></p>
+          </div>
+
+          <div class="story-section">
+            <div class="story-h4"><span class="en-only">The proof</span><span class="de-only">Der Beweis</span><span class="pt-only">A prova</span></div>
+            <p class="story-para"><span class="en-only">My career didn't start with a title. It started with a screwdriver.</span><span class="de-only">Meine Karriere begann nicht mit einem Titel. Sie begann mit einem Schraubenzieher.</span><span class="pt-only">A minha carreira não começou com um título. Começou com uma chave de fendas.</span></p>
+            <p class="story-para"><span class="en-only">I joined a small company repairing coffee machines — unglamorous work, but honest work. Two years in, one of the world's largest food &amp; beverage groups invited me to help build their repair centre from scratch. I didn't just join the project. I became one of its engines.</span><span class="de-only">Ich arbeitete in einem kleinen Unternehmen als Kaffeemaschinenreparateur. Zwei Jahre später lud mich eine der weltgrössten Food &amp; Beverage-Gruppen ein, ihr Reparaturzentrum von Grund auf aufzubauen. Ich wurde einer seiner Antriebskräfte.</span><span class="pt-only">Trabalhei numa pequena empresa a reparar máquinas de café. Dois anos depois, um dos maiores grupos de food &amp; beverage do mundo convidou-me para ajudar a construir o seu centro de reparação de raiz. Tornei-me um dos seus motores.</span></p>
+            <p class="story-para"><span class="en-only">Over six years, I went from technician to trainer to Repair Centre Manager, leading a team of 11 people. Here's what that looked like in practice:</span><span class="de-only">In sechs Jahren entwickelte ich mich vom Techniker zum Trainer zum Repair Center Manager mit einem Team von 11 Personen. So sah das in der Praxis aus:</span><span class="pt-only">Em seis anos, evolui de técnico a formador a Repair Center Manager, liderando uma equipa de 11 pessoas. Na prática, foi assim:</span></p>
+            <ul class="story-list">
+              <li><span class="en-only">Trained <strong>500+ people</strong> across technical and customer support teams</span><span class="de-only">Mehr als <strong>500 Mitarbeitende</strong> in technischen und Kundenserviceteams geschult</span><span class="pt-only">Formei mais de <strong>500 pessoas</strong> em equipas técnicas e de suporte ao cliente</span></li>
+              <li><span class="en-only">Cut the second repair rate <strong>from 13.9% to 5.77% in a single year</strong> by rebuilding the process from the ground up</span><span class="de-only">2nd-Repair-Rate in einem Jahr <strong>von 13,9% auf 5,77% gesenkt</strong> durch vollständige Neugestaltung des Prozesses</span><span class="pt-only">Reduzi a taxa de segunda reparação <strong>de 13,9% para 5,77% num único ano</strong> ao reconstruir o processo de raiz</span></li>
+              <li><span class="en-only">Designed warehouse layouts, technical workflows, and cross-department systems connecting Sales, Supply, Finance, Marketing, IT and Quality</span><span class="de-only">Lagerlayouts, technische Workflows und abteilungsübergreifende Systeme entworfen — Vertrieb, Supply, Finanzen, Marketing, IT und Qualität verbunden</span><span class="pt-only">Desenhei layouts de armazém, fluxos técnicos e sistemas entre departamentos ligando Vendas, Supply, Finanças, Marketing, IT e Qualidade</span></li>
+              <li><span class="en-only">Implemented a circular economy project that <strong>recycled 650 machines</strong> in a single year</span><span class="de-only">Ein Kreislaufwirtschaftsprojekt umgesetzt, das <strong>650 Maschinen</strong> in einem Jahr recycelte</span><span class="pt-only">Implementei um projeto de economia circular que <strong>reciclou 650 máquinas</strong> num único ano</span></li>
+            </ul>
+            <p class="story-para"><span class="en-only">None of this came from a manual. It came from refusing to accept a broken process as normal.</span><span class="de-only">Nichts davon kam aus einem Handbuch. Es kam aus der Weigerung, einen kaputten Prozess als normal zu akzeptieren.</span><span class="pt-only">Nada disto veio de um manual. Veio de me recusar a aceitar um processo partido como normal.</span></p>
+          </div>
+
+          <div class="story-section">
+            <div class="story-h4"><span class="en-only">The leap</span><span class="de-only">Der Sprung</span><span class="pt-only">O salto</span></div>
+            <p class="story-para"><span class="en-only">In 2022, I made one of the boldest decisions of my life: I moved to Switzerland. New country. New language. New standard.</span><span class="de-only">2022 traf ich eine der mutigsten Entscheidungen meines Lebens: Ich zog in die Schweiz. Neues Land. Neue Sprache. Neuer Massstab.</span><span class="pt-only">Em 2022, tomei uma das decisões mais corajosas da minha vida: mudei-me para a Suíça. Novo país. Nova língua. Novo padrão.</span></p>
+            <p class="story-para"><span class="en-only">I joined a Swiss robotics startup at the frontier of food &amp; beverage innovation as Process and Production Engineer. Today I'm Head of Service Operations. I designed production layouts, built processes from zero, and created the operational foundations a fast-growing company needs to scale without growing chaos.</span><span class="de-only">Ich trat einem Schweizer Robotik-Startup als Process and Production Engineer bei. Heute bin ich Head of Service Operations. Ich entwarf Produktionslayouts, baute Prozesse von Null auf und schuf die operativen Grundlagen, die ein schnell wachsendes Unternehmen braucht, um ohne Chaos zu skalieren.</span><span class="pt-only">Entrei numa startup suíça de robótica como Engenheiro de Processo e Produção. Hoje sou Head of Service Operations. Desenhei layouts de produção, construí processos de raiz e criei as bases operacionais que uma empresa em crescimento rápido precisa para escalar sem caos.</span></p>
+            <p class="story-para"><span class="en-only">Last year, I earned my <strong>Lean Six Sigma Green Belt</strong> certification. Not to add a credential to my CV — to put a formal name to what I'd been practising, and proving, for over a decade.</span><span class="de-only">Letztes Jahr erwarb ich meinen <strong>Lean Six Sigma Green Belt</strong>. Nicht um eine Zeile in meinen Lebenslauf hinzuzufügen — sondern um dem, was ich über ein Jahrzehnt praktiziert und bewiesen hatte, einen formellen Namen zu geben.</span><span class="pt-only">No ano passado, obtive a certificação <strong>Lean Six Sigma Green Belt</strong>. Não para adicionar uma linha ao CV — mas para dar nome formal ao que tinha estado a praticar, e a provar, durante mais de uma década.</span></p>
+          </div>
+
+          <div class="story-section">
+            <div class="story-h4"><span class="en-only">Why subtil.</span><span class="de-only">Warum subtil.</span><span class="pt-only">Porquê a subtil.</span></div>
+            <p class="story-para"><span class="en-only">Most organisations don't have a talent problem. They have a <strong>clarity problem.</strong> Unclear processes, undefined standards, goals that live in people's heads instead of in systems. When you fix that, everything else follows — productivity, morale, growth.</span><span class="de-only">Die meisten Organisationen haben kein Talent-Problem. Sie haben ein <strong>Klarheitsproblem.</strong> Unklare Prozesse, undefinierte Standards, Ziele, die in Köpfen leben statt in Systemen. Wenn man das löst, folgt alles andere: Produktivität, Moral, Wachstum.</span><span class="pt-only">A maioria das organizações não tem um problema de talento. Tem um <strong>problema de clareza.</strong> Processos pouco claros, standards indefinidos, objetivos que vivem nas cabeças das pessoas em vez de em sistemas. Quando resolves isso, tudo o resto segue — produtividade, moral, crescimento.</span></p>
+            <p class="story-para"><span class="en-only">I don't consult from a distance. I work inside your team, alongside your people, until the improvement is real — and until your team owns it without me.</span><span class="de-only">Ich berate nicht aus der Distanz. Ich arbeite in deinem Team, neben deinen Menschen, bis die Verbesserung real ist — und bis dein Team sie ohne mich trägt.</span><span class="pt-only">Não consulto à distância. Trabalho dentro da tua equipa, ao lado das tuas pessoas, até a melhoria ser real — e até a tua equipa a dominar sem mim.</span></p>
+            <p class="story-para story-tagline"><span class="en-only">Because the best result I can give you is one you no longer need me for.</span><span class="de-only">Denn das beste Ergebnis, das ich dir geben kann, ist eines, für das du mich nicht mehr brauchst.</span><span class="pt-only">Porque o melhor resultado que te posso dar é aquele de que já não precisas de mim.</span></p>
+          </div>
+
+        </div>
 
         <div class="creds">
           <div class="cred">
@@ -1651,6 +1812,17 @@
   }
   window.addEventListener('scroll', updateHeader, { passive: true });
   updateHeader();
+
+  // Story expand/collapse
+  function toggleStory(btn) {
+    const full = document.getElementById('story-full');
+    const isExpanded = btn.dataset.expanded === 'true';
+    btn.dataset.expanded = isExpanded ? 'false' : 'true';
+    full.classList.toggle('expanded', !isExpanded);
+    if (!isExpanded) {
+      setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    }
+  }
 
   // Reveal on scroll
   const io = new IntersectionObserver(entries => {
