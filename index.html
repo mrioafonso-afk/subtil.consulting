@@ -168,6 +168,34 @@
     color: var(--signal);
   }
   .lang-sep { opacity: 0.3; padding-top: 6px; }
+  .nav-audit {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--signal);
+    border: 1px solid var(--signal);
+    padding: 6px 13px;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+  .nav-audit:hover { background: var(--signal); color: var(--ink); }
+  .site-header.over-dark .nav-audit { color: var(--signal); border-color: var(--signal); }
+  .hero-audit-nudge {
+    margin-top: 20px;
+    font-family: var(--font-display);
+    font-size: 13px;
+  }
+  .hero-audit-nudge a {
+    color: var(--mid-gray);
+    text-decoration: none;
+    border-bottom: 1px solid #3a3937;
+    padding-bottom: 2px;
+    transition: color .2s, border-color .2s;
+  }
+  .hero-audit-nudge a:hover { color: var(--signal); border-color: var(--signal); }
 
   @media (max-width: 800px) {
     .nav-links { gap: 18px; }
@@ -1047,6 +1075,11 @@
           <span class="de-only">Über</span>
           <span class="pt-only">Sobre</span>
         </a>
+        <a href="audit.html" class="nav-audit">
+          <span class="en-only">Free Audit</span>
+          <span class="de-only">Gratis Audit</span>
+          <span class="pt-only">Audit Grátis</span>
+        </a>
         <a href="#contact" class="nav-link nav-cta">
           <span class="en-only">Talk to Mario</span>
           <span class="de-only">Mario kontaktieren</span>
@@ -1090,6 +1123,13 @@
         <span class="pt-only">Enviar mensagem</span>
       </a>
     </div>
+    <p class="hero-audit-nudge">
+      <a href="audit.html">
+        <span class="en-only">or try the Free Process Audit first →</span>
+        <span class="de-only">oder zuerst den kostenlosen Prozess-Audit machen →</span>
+        <span class="pt-only">ou experimenta primeiro o Audit de Processo grátis →</span>
+      </a>
+    </p>
   </div>
 </section>
 
@@ -1651,30 +1691,29 @@
         </p>
       </div>
 
-      <form class="lead-form" onsubmit="event.preventDefault(); alert(document.documentElement.dataset.lang === 'de' ? 'Danke! Der Audit-PDF wird an deine E-Mail geschickt.' : document.documentElement.dataset.lang === 'pt' ? 'Obrigado! O PDF do audit está a caminho.' : 'Thanks! The audit PDF is on its way to your inbox.');">
-        <h4>
-          <span class="en-only">Get the PDF</span>
-          <span class="de-only">Hol dir das PDF</span>
-          <span class="pt-only">Receber o PDF</span>
+      <div class="lead-form" style="display:flex;flex-direction:column;justify-content:center;">
+        <h4 style="font-family:var(--font-display);font-size:16px;margin:0 0 8px;color:var(--paper);">
+          <span class="en-only">Free — no signup required</span>
+          <span class="de-only">Kostenlos — keine Anmeldung nötig</span>
+          <span class="pt-only">Grátis — sem registo necessário</span>
         </h4>
-        <p>
-          <span class="en-only">No spam, no list-trading. Just the audit.</span>
-          <span class="de-only">Kein Spam, kein Listenhandel. Nur der Audit.</span>
-          <span class="pt-only">Sem spam. O audit, só isso.</span>
+        <p style="color:var(--mid-gray);font-style:italic;font-size:14px;margin:0 0 28px;">
+          <span class="en-only">Answer 12 questions, get your results instantly. No email needed.</span>
+          <span class="de-only">12 Fragen beantworten, sofort Ergebnisse erhalten. Keine E-Mail nötig.</span>
+          <span class="pt-only">Responde a 12 perguntas, obtém resultados imediatamente. Sem email.</span>
         </p>
-        <input type="text" placeholder="" data-placeholder-en="Your name" data-placeholder-de="Dein Name" data-placeholder-pt="O teu nome" required>
-        <input type="email" placeholder="" data-placeholder-en="Your email" data-placeholder-de="Deine E-Mail" data-placeholder-pt="O teu email" required>
-        <button type="submit">
-          <span class="en-only">SEND ME THE AUDIT</span>
-          <span class="de-only">AUDIT ZUSCHICKEN</span>
-          <span class="pt-only">ENVIAR O AUDIT</span>
-        </button>
-        <p class="small">
-          <span class="en-only">One email. Unsubscribe anytime.</span>
-          <span class="de-only">Eine E-Mail. Jederzeit abbestellbar.</span>
-          <span class="pt-only">Um email. Cancela a qualquer momento.</span>
+        <a href="audit.html" class="btn-primary" style="align-self:flex-start;">
+          <span class="en-only">START THE AUDIT</span>
+          <span class="de-only">AUDIT STARTEN</span>
+          <span class="pt-only">INICIAR O AUDIT</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <p style="font-size:12px;color:var(--mid-gray);margin:16px 0 0;font-style:italic;text-align:center;">
+          <span class="en-only">Takes under 10 minutes. Completely free.</span>
+          <span class="de-only">Unter 10 Minuten. Völlig kostenlos.</span>
+          <span class="pt-only">Menos de 10 minutos. Completamente grátis.</span>
         </p>
-      </form>
+      </div>
     </div>
   </div>
 </section>
