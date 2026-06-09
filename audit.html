@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 1-Hour Process Audit — subtil.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141413;
+    --paper: #faf9f5;
+    --paper-soft: #f4f2ea;
+    --mid-gray: #b0aea5;
+    --light-gray: #e8e6dc;
+    --signal: #d97757;
+    --signal-dark: #c46847;
+    --process: #6a9bcc;
+    --outcome: #788c5d;
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Lora', Georgia, serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page { display: none; min-height: 100vh; flex-direction: column; }
+  .page.active { display: flex; }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px clamp(20px, 5vw, 60px);
+    border-bottom: 1px solid #2c2b2a;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--paper);
+  }
+  .stack-mark {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 22px;
+  }
+  .stack-mark span {
+    display: block;
+    height: 5px;
+    width: 100%;
+    border-radius: 1px;
+  }
+  .stack-mark span:nth-child(1) { background: var(--outcome); }
+  .stack-mark span:nth-child(2) { background: var(--process); }
+  .stack-mark span:nth-child(3) { background: var(--signal); }
+
+  .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* ===== LANGUAGE TOGGLE ===== */
+  .lang-toggle { display: flex; gap: 4px; }
+  .lang-btn {
+    background: none;
+    border: 1px solid #2c2b2a;
+    color: var(--mid-gray);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 5px 9px;
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+    border-radius: 1px;
+  }
+  .lang-btn:hover { color: var(--paper); border-color: var(--mid-gray); }
+  .lang-btn.active { border-color: var(--signal); color: var(--signal); }
+
+  .back-link {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--mid-gray);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .back-link:hover { color: var(--paper); }
+
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 60px);
+  }
+
+  .card {
+    background: #1c1b1a;
+    border: 1px solid #2c2b2a;
+    padding: clamp(32px, 5vw, 60px);
+    max-width: 680px;
+    width: 100%;
+  }
+
+  /* ===== INTRO PAGE ===== */
+  .intro-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .intro-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+  }
+  .intro-title .accent { color: var(--signal); }
+  .intro-lede {
+    font-style: italic;
+    color: var(--mid-gray);
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+  .intro-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .intro-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--mid-gray);
+  }
+  .intro-meta-item .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--signal);
+    flex-shrink: 0;
+  }
+  .intro-areas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 480px) { .intro-areas { grid-template-columns: 1fr; } }
+  .area-chip {
+    border: 1px solid #2c2b2a;
+    padding: 12px 16px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--mid-gray);
+  }
+  .area-chip .area-num { color: var(--signal); margin-right: 8px; }
+
+  /* ===== BUTTONS ===== */
+  .btn-primary {
+    background: var(--signal);
+    color: var(--ink);
+    border: none;
+    padding: 16px 32px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--signal-dark); transform: translateX(2px); }
+  .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+  .btn-ghost {
+    background: none;
+    color: var(--mid-gray);
+    border: 1px solid #3a3937;
+    padding: 14px 24px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+    border-radius: 2px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-ghost:hover { color: var(--paper); border-color: var(--mid-gray); }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-wrap { margin-bottom: 36px; }
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-area {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--signal);
+    text-transform: uppercase;
+  }
+  .progress-count {
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--mid-gray);
+  }
+  .progress-bar {
+    height: 3px;
+    background: #2c2b2a;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--signal);
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+
+  /* ===== QUESTION ===== */
+  .q-number {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--mid-gray);
+    margin-bottom: 14px;
+  }
+  .q-text {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .option {
+    border: 1px solid #2c2b2a;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+    background: none;
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 2px;
+    width: 100%;
+  }
+  .option:hover { border-color: var(--signal); background: rgba(217, 119, 87, 0.05); }
+  .option.selected { border-color: var(--signal); background: rgba(217, 119, 87, 0.1); }
+  .option-letter {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border: 1px solid #3a3937;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mid-gray);
+    transition: background .2s, border-color .2s, color .2s;
+    margin-top: 1px;
+  }
+  .option.selected .option-letter { background: var(--signal); border-color: var(--signal); color: var(--ink); }
+
+  .q-nav { display: flex; gap: 12px; align-items: center; }
+
+  /* ===== RESULTS PAGE ===== */
+  .results-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .results-title {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .results-sub {
+    font-style: italic;
+    color: var(--mid-gray);
+    font-size: 15px;
+    margin-bottom: 36px;
+    line-height: 1.5;
+  }
+
+  .area-results { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+  .area-result {
+    border: 1px solid #2c2b2a;
+    padding: 20px 22px;
+    position: relative;
+    transition: border-color .3s;
+  }
+  .area-result.weak { border-color: var(--signal); background: rgba(217, 119, 87, 0.05); }
+  .area-result-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .area-result-name { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; }
+  .area-result.weak .area-result-name { color: var(--signal); }
+  .area-score-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 1px;
+  }
+  .score-strong    { background: rgba(120, 140, 93, 0.2); color: var(--outcome); }
+  .score-attention { background: rgba(106, 155, 204, 0.2); color: var(--process); }
+  .score-priority  { background: rgba(217, 119, 87, 0.2); color: var(--signal); }
+  .score-critical  { background: rgba(217, 119, 87, 0.3); color: var(--signal); }
+
+  .area-bar { height: 4px; background: #2c2b2a; border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+  .area-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+  .fill-strong    { background: var(--outcome); }
+  .fill-attention { background: var(--process); }
+  .fill-priority  { background: var(--signal); }
+  .fill-critical  { background: var(--signal); }
+
+  .area-recommendation { font-family: var(--font-display); font-size: 12px; color: var(--mid-gray); font-style: italic; margin: 0; }
+  .area-result.weak .area-recommendation { color: rgba(217, 119, 87, 0.8); }
+
+  .weak-badge {
+    position: absolute;
+    top: -9px; right: 16px;
+    background: var(--signal);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+  }
+
+  .results-divider { border: none; border-top: 1px solid #2c2b2a; margin: 32px 0; }
+
+  .results-cta-text { font-style: italic; color: var(--mid-gray); font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
+  .results-cta-text strong { color: var(--paper); font-style: normal; }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .retake-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--mid-gray);
+    cursor: pointer;
+    padding: 0;
+    margin-top: 20px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: block;
+  }
+  .retake-btn:hover { color: var(--paper); }
+
+  /* ===== LANGUAGE HIDING ===== */
+  [data-lang="en"] .de-only,
+  [data-lang="en"] .pt-only { display: none; }
+  [data-lang="de"] .en-only,
+  [data-lang="de"] .pt-only { display: none; }
+  [data-lang="pt"] .en-only,
+  [data-lang="pt"] .de-only { display: none; }
+
+  /* ===== EMAIL CAPTURE ===== */
+  .email-capture {
+    background: rgba(217, 119, 87, 0.07);
+    border: 1px solid rgba(217, 119, 87, 0.3);
+    padding: 28px 28px 22px;
+    margin-bottom: 32px;
+  }
+  .email-capture-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .email-capture-heading {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .email-capture-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--mid-gray);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .email-capture-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .email-capture-row input {
+    flex: 1;
+    min-width: 150px;
+    background: transparent;
+    color: var(--paper);
+    border: none;
+    border-bottom: 1px solid #3a3937;
+    padding: 10px 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .email-capture-row input:focus { border-bottom-color: var(--signal); }
+  .email-capture-row input::placeholder { color: var(--mid-gray); font-style: italic; }
+  .email-capture-note {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--mid-gray);
+    margin-top: 14px;
+    font-style: italic;
+    letter-spacing: 0.03em;
+  }
+  .email-capture-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--outcome);
+    padding: 4px 0;
+  }
+  .email-capture-success svg { flex-shrink: 0; }
+
+  /* ===== RECOMMENDATION CARD ===== */
+  .rec-wrap { margin-bottom: 36px; }
+  .rec-intro-eyebrow {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .rec-intro-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--paper);
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .rec-card {
+    border: 2px solid var(--signal);
+    padding: 32px 28px 26px;
+    position: relative;
+    background: rgba(217, 119, 87, 0.07);
+  }
+  .rec-badge {
+    position: absolute;
+    top: -11px; left: 24px;
+    background: var(--signal);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    padding: 4px 12px;
+  }
+  .rec-tag {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    color: var(--mid-gray);
+    margin-bottom: 10px;
+  }
+  .rec-name {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .rec-subtitle { font-family: var(--font-body); font-style: italic; color: var(--mid-gray); font-size: 14px; margin-bottom: 18px; }
+  .rec-why {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #c8c5bc;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+    border-left: 3px solid var(--signal);
+    padding-left: 16px;
+  }
+  .rec-price { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--signal); margin-bottom: 0; }
+  .rec-currency { font-size: 13px; color: var(--mid-gray); margin-right: 4px; font-weight: 500; vertical-align: top; line-height: 2.4; }
+  .rec-price-note { font-family: var(--font-body); font-style: italic; font-size: 12px; color: var(--mid-gray); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ===== INTRO PAGE ===== -->
+<div class="page active" id="page-intro">
+  <div class="top-bar">
+    <a href="index.html" class="brand">
+      <span class="stack-mark"><span></span><span></span><span></span></span>
+      <span>subtil<span style="color:var(--signal)">.</span></span>
+    </a>
+    <div class="top-bar-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-set-lang="en">EN</button>
+        <button class="lang-btn" data-set-lang="de">DE</button>
+        <button class="lang-btn" data-set-lang="pt">PT</button>
+      </div>
+      <a href="index.html" class="back-link">
+        <span class="en-only">← Back to site</span>
+        <span class="de-only">← Zur Website</span>
+        <span class="pt-only">← Voltar ao site</span>
+      </a>
+    </div>
+  </div>
+  <div class="main">
+    <div class="card">
+      <div class="intro-eyebrow">Free tool · subtil.</div>
+      <h1 class="intro-title">
+        <span class="en-only">The 1-Hour<br><span class="accent">Process Audit.</span></span>
+        <span class="de-only">Das 1-Stunden-<br><span class="accent">Prozessaudit.</span></span>
+        <span class="pt-only">A Auditoria de<br><span class="accent">Processos de 1 Hora.</span></span>
+      </h1>
+      <p class="intro-lede">
+        <span class="en-only">12 questions. Four areas. Instant results. Find the three biggest waste spots in your operations — no consultant required.</span>
+        <span class="de-only">12 Fragen. Vier Bereiche. Sofortige Ergebnisse. Finde die drei größten Schwachstellen in deinen Abläufen — ohne Berater.</span>
+        <span class="pt-only">12 perguntas. Quatro áreas. Resultados imediatos. Encontra os três maiores pontos de desperdício nas tuas operações — sem consultor.</span>
+      </p>
+      <div class="intro-meta">
+        <div class="intro-meta-item"><span class="dot"></span>
+          <span class="en-only">12 questions</span>
+          <span class="de-only">12 Fragen</span>
+          <span class="pt-only">12 perguntas</span>
+        </div>
+        <div class="intro-meta-item"><span class="dot"></span>
+          <span class="en-only">Under 10 minutes</span>
+          <span class="de-only">Unter 10 Minuten</span>
+          <span class="pt-only">Menos de 10 minutos</span>
+        </div>
+        <div class="intro-meta-item"><span class="dot"></span>
+          <span class="en-only">Instant score</span>
+          <span class="de-only">Sofortige Auswertung</span>
+          <span class="pt-only">Resultado imediato</span>
+        </div>
+        <div class="intro-meta-item"><span class="dot"></span>
+          <span class="en-only">Free, no signup</span>
+          <span class="de-only">Kostenlos, ohne Anmeldung</span>
+          <span class="pt-only">Grátis, sem registo</span>
+        </div>
+      </div>
+      <div class="intro-areas">
+        <div class="area-chip"><span class="area-num">01</span>
+          <span class="en-only">Process &amp; Flow</span>
+          <span class="de-only">Prozess &amp; Ablauf</span>
+          <span class="pt-only">Processo &amp; Fluxo</span>
+        </div>
+        <div class="area-chip"><span class="area-num">02</span>
+          <span class="en-only">Space &amp; Organisation</span>
+          <span class="de-only">Raum &amp; Organisation</span>
+          <span class="pt-only">Espaço &amp; Organização</span>
+        </div>
+        <div class="area-chip"><span class="area-num">03</span>
+          <span class="en-only">People &amp; Knowledge</span>
+          <span class="de-only">Menschen &amp; Wissen</span>
+          <span class="pt-only">Pessoas &amp; Conhecimento</span>
+        </div>
+        <div class="area-chip"><span class="area-num">04</span>
+          <span class="en-only">Results &amp; Measurement</span>
+          <span class="de-only">Ergebnisse &amp; Messung</span>
+          <span class="pt-only">Resultados &amp; Medição</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="startAudit()">
+        <span class="en-only">Start the audit</span>
+        <span class="de-only">Audit starten</span>
+        <span class="pt-only">Iniciar a auditoria</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUESTION PAGE ===== -->
+<div class="page" id="page-question">
+  <div class="top-bar">
+    <a href="index.html" class="brand">
+      <span class="stack-mark"><span></span><span></span><span></span></span>
+      <span>subtil<span style="color:var(--signal)">.</span></span>
+    </a>
+    <div class="top-bar-right">
+      <div class="lang-toggle">
+        <button class="lang-btn" data-set-lang="en">EN</button>
+        <button class="lang-btn" data-set-lang="de">DE</button>
+        <button class="lang-btn" data-set-lang="pt">PT</button>
+      </div>
+      <span style="font-family:var(--font-display);font-size:12px;color:var(--mid-gray);" id="q-progress-label">Question 1 of 12</span>
+    </div>
+  </div>
+  <div class="main">
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <div class="progress-area" id="q-area-label">Process &amp; Flow</div>
+          <div class="progress-count" id="q-count-label">1 / 12</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width:8%"></div>
+        </div>
+      </div>
+      <div class="q-number" id="q-number">01</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="options-container"></div>
+      <div class="q-nav">
+        <button class="btn-primary" id="btn-next" onclick="nextQuestion()" disabled>
+          <span id="btn-next-label">Next</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-ghost" id="btn-back" onclick="prevQuestion()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESULTS PAGE ===== -->
+<div class="page" id="page-results">
+  <div class="top-bar">
+    <a href="index.html" class="brand">
+      <span class="stack-mark"><span></span><span></span><span></span></span>
+      <span>subtil<span style="color:var(--signal)">.</span></span>
+    </a>
+    <div class="top-bar-right">
+      <div class="lang-toggle">
+        <button class="lang-btn" data-set-lang="en">EN</button>
+        <button class="lang-btn" data-set-lang="de">DE</button>
+        <button class="lang-btn" data-set-lang="pt">PT</button>
+      </div>
+      <a href="index.html" class="back-link">
+        <span class="en-only">← Back to site</span>
+        <span class="de-only">← Zur Website</span>
+        <span class="pt-only">← Voltar ao site</span>
+      </a>
+    </div>
+  </div>
+  <div class="main">
+    <div class="card">
+      <div class="results-eyebrow">
+        <span class="en-only">Your results</span>
+        <span class="de-only">Deine Ergebnisse</span>
+        <span class="pt-only">Os teus resultados</span>
+      </div>
+      <h2 class="results-title">
+        <span class="en-only">Your 3 biggest<br>waste spots.</span>
+        <span class="de-only">Deine 3 größten<br>Schwachstellen.</span>
+        <span class="pt-only">Os teus 3 maiores<br>pontos de desperdício.</span>
+      </h2>
+      <p class="results-sub">
+        <span class="en-only">Here's where your business is losing the most time, money, and energy.</span>
+        <span class="de-only">Hier verliert dein Unternehmen die meiste Zeit, Geld und Energie.</span>
+        <span class="pt-only">Aqui é onde o teu negócio está a perder mais tempo, dinheiro e energia.</span>
+      </p>
+      <div class="area-results" id="area-results"></div>
+      <div class="rec-wrap" id="package-recommendation"></div>
+
+      <!-- Email capture -->
+      <div class="email-capture">
+        <div class="email-capture-eyebrow">
+          <span class="en-only">Send your results to Mario</span>
+          <span class="de-only">Ergebnisse an Mario senden</span>
+          <span class="pt-only">Enviar resultados ao Mario</span>
+        </div>
+        <div class="email-capture-heading">
+          <span class="en-only">Walk into your first call prepared.</span>
+          <span class="de-only">Gut vorbereitet ins erste Gespräch.</span>
+          <span class="pt-only">Entra na primeira chamada preparado.</span>
+        </div>
+        <p class="email-capture-sub">
+          <span class="en-only">Mario will review your scores before you speak — so the conversation starts where it matters, not at square one.</span>
+          <span class="de-only">Mario prüft deine Ergebnisse vor dem Gespräch — damit ihr dort anfangt, wo es wirklich zählt.</span>
+          <span class="pt-only">O Mario vai analisar os teus resultados antes de falarem — para a conversa começar onde importa, não do zero.</span>
+        </p>
+        <form id="results-form" onsubmit="submitResults(event)">
+          <div class="email-capture-row">
+            <input type="text" id="capture-name"
+              data-placeholder-en="Your name (optional)"
+              data-placeholder-de="Dein Name (optional)"
+              data-placeholder-pt="O teu nome (opcional)">
+            <input type="email" id="capture-email" required
+              data-placeholder-en="Your email"
+              data-placeholder-de="Deine E-Mail"
+              data-placeholder-pt="O teu email">
+            <button type="submit" class="btn-primary" id="capture-submit-btn">
+              <span class="en-only">Send my results</span>
+              <span class="de-only">Ergebnisse senden</span>
+              <span class="pt-only">Enviar resultados</span>
+            </button>
+          </div>
+          <p class="email-capture-note">
+            <span class="en-only">No spam. One email from Mario — when he's ready to help.</span>
+            <span class="de-only">Kein Spam. Eine E-Mail von Mario — wenn er helfen kann.</span>
+            <span class="pt-only">Sem spam. Um email do Mario — quando estiver pronto para ajudar.</span>
+          </p>
+        </form>
+        <div id="capture-success" style="display:none;" class="email-capture-success">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>
+            <span class="en-only">Done — Mario will review your results before reaching out.</span>
+            <span class="de-only">Erledigt — Mario prüft deine Ergebnisse vor der Kontaktaufnahme.</span>
+            <span class="pt-only">Feito — o Mario vai analisar os teus resultados antes de entrar em contacto.</span>
+          </span>
+        </div>
+      </div>
+
+      <hr class="results-divider">
+      <p class="results-cta-text">
+        <span class="en-only"><strong>These are fixable.</strong> A short conversation is enough to understand what's really behind each one — and what to do about it.</span>
+        <span class="de-only"><strong>Das ist lösbar.</strong> Ein kurzes Gespräch reicht, um zu verstehen, was wirklich dahintersteckt — und was dagegen zu tun ist.</span>
+        <span class="pt-only"><strong>Isto tem solução.</strong> Uma conversa curta é suficiente para perceber o que está realmente por detrás de cada ponto — e o que fazer.</span>
+      </p>
+      <div class="cta-row">
+        <a href="contact.html" class="btn-primary">
+          <span class="en-only">Talk to Mario</span>
+          <span class="de-only">Mario kontaktieren</span>
+          <span class="pt-only">Falar com o Mario</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="services.html" class="btn-ghost">
+          <span class="en-only">See the packages</span>
+          <span class="de-only">Pakete ansehen</span>
+          <span class="pt-only">Ver os pacotes</span>
+        </a>
+      </div>
+      <button class="retake-btn" onclick="retake()">
+        <span class="en-only">Retake the audit</span>
+        <span class="de-only">Audit wiederholen</span>
+        <span class="pt-only">Repetir a auditoria</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== MULTILINGUAL QUESTIONS =====
+const QUESTIONS = {
+  en: [
+    { area: 0, text: "If you were absent for 2 weeks, what would happen to your operations?", options: [
+      { letter: "A", text: "Everything runs normally — processes are documented and followed", score: 4 },
+      { letter: "B", text: "Minor delays, but the team manages", score: 3 },
+      { letter: "C", text: "Important decisions would stall without me", score: 2 },
+      { letter: "D", text: "Operations would seriously suffer", score: 1 }
+    ]},
+    { area: 0, text: "How are your core processes documented?", options: [
+      { letter: "A", text: "Fully documented, up to date, and consistently followed", score: 4 },
+      { letter: "B", text: "Partially documented — the important parts exist somewhere", score: 3 },
+      { letter: "C", text: "Mostly in people's heads", score: 2 },
+      { letter: "D", text: "Not documented at all", score: 1 }
+    ]},
+    { area: 0, text: "How long before a new team member reaches full productivity?", options: [
+      { letter: "A", text: "Less than 1 week — we have a structured onboarding process", score: 4 },
+      { letter: "B", text: "1–2 weeks", score: 3 },
+      { letter: "C", text: "About a month", score: 2 },
+      { letter: "D", text: "More than a month, or it depends heavily on who trains them", score: 1 }
+    ]},
+    { area: 1, text: "How would you describe your main work environment — physical or digital?", options: [
+      { letter: "A", text: "Everything has a place and is always in it", score: 4 },
+      { letter: "B", text: "Mostly organised, with occasional clutter", score: 3 },
+      { letter: "C", text: "Hard to find things without asking someone", score: 2 },
+      { letter: "D", text: "Time is regularly lost searching for things", score: 1 }
+    ]},
+    { area: 1, text: "How quickly can you locate what you need — a document, file, tool or material?", options: [
+      { letter: "A", text: "Under 1 minute", score: 4 },
+      { letter: "B", text: "1–5 minutes", score: 3 },
+      { letter: "C", text: "5–15 minutes", score: 2 },
+      { letter: "D", text: "More than 15 minutes — or sometimes it's never found", score: 1 }
+    ]},
+    { area: 1, text: "After a busy or chaotic period, how does your workspace recover?", options: [
+      { letter: "A", text: "Automatically — standards are in place and followed", score: 4 },
+      { letter: "B", text: "With some effort, within a day", score: 3 },
+      { letter: "C", text: "It takes a week or more", score: 2 },
+      { letter: "D", text: "It never fully recovers", score: 1 }
+    ]},
+    { area: 2, text: "How clearly are roles and responsibilities defined in your team?", options: [
+      { letter: "A", text: "Clearly defined — everyone knows exactly who owns what", score: 4 },
+      { letter: "B", text: "Mostly clear, with a few grey areas", score: 3 },
+      { letter: "C", text: "Often unclear — things fall through the gaps", score: 2 },
+      { letter: "D", text: "No clear ownership — everything routes through one person", score: 1 }
+    ]},
+    { area: 2, text: "When a recurring problem occurs, how is it handled?", options: [
+      { letter: "A", text: "The root cause is identified and permanently fixed", score: 4 },
+      { letter: "B", text: "A fix is applied, but the problem may return", score: 3 },
+      { letter: "C", text: "The same person solves it every time it comes up", score: 2 },
+      { letter: "D", text: "It gets managed around — never truly solved", score: 1 }
+    ]},
+    { area: 2, text: "How is knowledge transferred from experienced staff to new team members?", options: [
+      { letter: "A", text: "Through structured materials and documented processes", score: 4 },
+      { letter: "B", text: "Experienced staff show them informally", score: 3 },
+      { letter: "C", text: "Trial and error — they figure it out", score: 2 },
+      { letter: "D", text: "Critical knowledge lives in one or two people's heads", score: 1 }
+    ]},
+    { area: 3, text: "How do you measure the performance of your main process?", options: [
+      { letter: "A", text: "Clear KPIs, tracked regularly and acted upon", score: 4 },
+      { letter: "B", text: "Some tracking, but not systematic", score: 3 },
+      { letter: "C", text: "We notice when something goes wrong", score: 2 },
+      { letter: "D", text: "No formal measurement in place", score: 1 }
+    ]},
+    { area: 3, text: "How consistent is the quality of your product or service?", options: [
+      { letter: "A", text: "Highly consistent — customers rarely raise issues", score: 4 },
+      { letter: "B", text: "Generally good, with occasional problems", score: 3 },
+      { letter: "C", text: "Varies noticeably depending on who does the work", score: 2 },
+      { letter: "D", text: "Inconsistent — complaints or rework are common", score: 1 }
+    ]},
+    { area: 3, text: "When you make a process improvement, what typically happens next?", options: [
+      { letter: "A", text: "It sticks — we document it and train the team", score: 4 },
+      { letter: "B", text: "It works for a while, then gradually fades", score: 3 },
+      { letter: "C", text: "Improvements are discussed but rarely implemented", score: 2 },
+      { letter: "D", text: "We keep doing things the same way", score: 1 }
+    ]}
+  ],
+
+  de: [
+    { area: 0, text: "Was würde passieren, wenn du 2 Wochen lang abwesend wärst?", options: [
+      { letter: "A", text: "Alles läuft normal — Prozesse sind dokumentiert und werden eingehalten", score: 4 },
+      { letter: "B", text: "Kleinere Verzögerungen, aber das Team kommt zurecht", score: 3 },
+      { letter: "C", text: "Wichtige Entscheidungen würden ohne mich ins Stocken geraten", score: 2 },
+      { letter: "D", text: "Der Betrieb würde ernsthaft leiden", score: 1 }
+    ]},
+    { area: 0, text: "Wie sind deine Kernprozesse dokumentiert?", options: [
+      { letter: "A", text: "Vollständig dokumentiert, aktuell und konsequent eingehalten", score: 4 },
+      { letter: "B", text: "Teilweise dokumentiert — die wichtigen Teile existieren irgendwo", score: 3 },
+      { letter: "C", text: "Meistens im Kopf der Mitarbeitenden", score: 2 },
+      { letter: "D", text: "Gar nicht dokumentiert", score: 1 }
+    ]},
+    { area: 0, text: "Wie lange braucht ein neues Teammitglied, um voll produktiv zu sein?", options: [
+      { letter: "A", text: "Weniger als 1 Woche — wir haben einen strukturierten Onboarding-Prozess", score: 4 },
+      { letter: "B", text: "1–2 Wochen", score: 3 },
+      { letter: "C", text: "Etwa einen Monat", score: 2 },
+      { letter: "D", text: "Mehr als einen Monat, oder es hängt stark davon ab, wer einarbeitet", score: 1 }
+    ]},
+    { area: 1, text: "Wie würdest du deine Hauptarbeitsumgebung beschreiben — physisch oder digital?", options: [
+      { letter: "A", text: "Alles hat seinen Platz und ist immer dort", score: 4 },
+      { letter: "B", text: "Meistens organisiert, mit gelegentlichem Durcheinander", score: 3 },
+      { letter: "C", text: "Man muss jemanden fragen, um etwas zu finden", score: 2 },
+      { letter: "D", text: "Regelmäßig geht Zeit mit der Suche nach Dingen verloren", score: 1 }
+    ]},
+    { area: 1, text: "Wie schnell findest du, was du brauchst — ein Dokument, eine Datei, ein Werkzeug oder Material?", options: [
+      { letter: "A", text: "Unter 1 Minute", score: 4 },
+      { letter: "B", text: "1–5 Minuten", score: 3 },
+      { letter: "C", text: "5–15 Minuten", score: 2 },
+      { letter: "D", text: "Mehr als 15 Minuten — oder manchmal findet man es gar nicht", score: 1 }
+    ]},
+    { area: 1, text: "Wie erholt sich dein Arbeitsbereich nach einer intensiven Phase?", options: [
+      { letter: "A", text: "Automatisch — Standards sind vorhanden und werden eingehalten", score: 4 },
+      { letter: "B", text: "Mit etwas Aufwand, innerhalb eines Tages", score: 3 },
+      { letter: "C", text: "Es dauert eine Woche oder länger", score: 2 },
+      { letter: "D", text: "Er erholt sich nie wirklich", score: 1 }
+    ]},
+    { area: 2, text: "Wie klar sind Rollen und Verantwortlichkeiten in deinem Team definiert?", options: [
+      { letter: "A", text: "Klar definiert — jeder weiß genau, wer wofür zuständig ist", score: 4 },
+      { letter: "B", text: "Meistens klar, mit einigen Grauzonen", score: 3 },
+      { letter: "C", text: "Oft unklar — Dinge fallen durchs Raster", score: 2 },
+      { letter: "D", text: "Keine klare Zuständigkeit — alles läuft über eine Person", score: 1 }
+    ]},
+    { area: 2, text: "Wie wird mit einem wiederkehrenden Problem umgegangen?", options: [
+      { letter: "A", text: "Die Ursache wird identifiziert und dauerhaft behoben", score: 4 },
+      { letter: "B", text: "Eine Lösung wird angewandt, aber das Problem kann zurückkehren", score: 3 },
+      { letter: "C", text: "Dieselbe Person löst es jedes Mal", score: 2 },
+      { letter: "D", text: "Es wird umgangen — nie wirklich gelöst", score: 1 }
+    ]},
+    { area: 2, text: "Wie wird Wissen von erfahrenen Mitarbeitenden an neue Teammitglieder weitergegeben?", options: [
+      { letter: "A", text: "Durch strukturierte Materialien und dokumentierte Prozesse", score: 4 },
+      { letter: "B", text: "Erfahrene Mitarbeitende zeigen es informell", score: 3 },
+      { letter: "C", text: "Trial and Error — sie finden es selbst heraus", score: 2 },
+      { letter: "D", text: "Kritisches Wissen steckt in den Köpfen von ein oder zwei Personen", score: 1 }
+    ]},
+    { area: 3, text: "Wie misst du die Leistung deines Hauptprozesses?", options: [
+      { letter: "A", text: "Klare KPIs, regelmäßig verfolgt und entsprechend gehandelt", score: 4 },
+      { letter: "B", text: "Etwas Tracking, aber nicht systematisch", score: 3 },
+      { letter: "C", text: "Wir merken es, wenn etwas schiefläuft", score: 2 },
+      { letter: "D", text: "Keine formale Messung vorhanden", score: 1 }
+    ]},
+    { area: 3, text: "Wie konsistent ist die Qualität deines Produkts oder deiner Dienstleistung?", options: [
+      { letter: "A", text: "Sehr konsistent — Kunden melden selten Probleme", score: 4 },
+      { letter: "B", text: "Generell gut, mit gelegentlichen Problemen", score: 3 },
+      { letter: "C", text: "Schwankt merklich je nachdem, wer die Arbeit macht", score: 2 },
+      { letter: "D", text: "Inkonsistent — Beschwerden oder Nacharbeit sind häufig", score: 1 }
+    ]},
+    { area: 3, text: "Was passiert typischerweise, nachdem du eine Prozessverbesserung umgesetzt hast?", options: [
+      { letter: "A", text: "Sie hält — wir dokumentieren sie und schulen das Team", score: 4 },
+      { letter: "B", text: "Sie funktioniert eine Weile, lässt dann aber nach", score: 3 },
+      { letter: "C", text: "Verbesserungen werden besprochen, aber selten umgesetzt", score: 2 },
+      { letter: "D", text: "Wir machen weiter wie bisher", score: 1 }
+    ]}
+  ],
+
+  pt: [
+    { area: 0, text: "Se estivesses ausente durante 2 semanas, o que aconteceria às tuas operações?", options: [
+      { letter: "A", text: "Tudo funciona normalmente — os processos estão documentados e são seguidos", score: 4 },
+      { letter: "B", text: "Pequenos atrasos, mas a equipa gere", score: 3 },
+      { letter: "C", text: "Decisões importantes ficariam paradas sem mim", score: 2 },
+      { letter: "D", text: "As operações sofreriam seriamente", score: 1 }
+    ]},
+    { area: 0, text: "Como estão documentados os teus processos principais?", options: [
+      { letter: "A", text: "Totalmente documentados, atualizados e seguidos de forma consistente", score: 4 },
+      { letter: "B", text: "Parcialmente documentados — as partes importantes existem algures", score: 3 },
+      { letter: "C", text: "Maioritariamente na cabeça das pessoas", score: 2 },
+      { letter: "D", text: "Não documentados de todo", score: 1 }
+    ]},
+    { area: 0, text: "Quanto tempo demora um novo membro da equipa a atingir a produtividade total?", options: [
+      { letter: "A", text: "Menos de 1 semana — temos um processo de integração estruturado", score: 4 },
+      { letter: "B", text: "1–2 semanas", score: 3 },
+      { letter: "C", text: "Cerca de um mês", score: 2 },
+      { letter: "D", text: "Mais de um mês, ou depende muito de quem os forma", score: 1 }
+    ]},
+    { area: 1, text: "Como descreverias o teu ambiente de trabalho principal — físico ou digital?", options: [
+      { letter: "A", text: "Tudo tem um lugar e está sempre lá", score: 4 },
+      { letter: "B", text: "Maioritariamente organizado, com desordem ocasional", score: 3 },
+      { letter: "C", text: "Difícil encontrar coisas sem perguntar a alguém", score: 2 },
+      { letter: "D", text: "Perde-se tempo regularmente à procura de coisas", score: 1 }
+    ]},
+    { area: 1, text: "Com que rapidez encontras o que precisas — um documento, ficheiro, ferramenta ou material?", options: [
+      { letter: "A", text: "Menos de 1 minuto", score: 4 },
+      { letter: "B", text: "1–5 minutos", score: 3 },
+      { letter: "C", text: "5–15 minutos", score: 2 },
+      { letter: "D", text: "Mais de 15 minutos — ou às vezes nunca se encontra", score: 1 }
+    ]},
+    { area: 1, text: "Depois de um período intenso, como se recupera o teu espaço de trabalho?", options: [
+      { letter: "A", text: "Automaticamente — os standards estão definidos e são seguidos", score: 4 },
+      { letter: "B", text: "Com algum esforço, num dia", score: 3 },
+      { letter: "C", text: "Demora uma semana ou mais", score: 2 },
+      { letter: "D", text: "Nunca recupera totalmente", score: 1 }
+    ]},
+    { area: 2, text: "Como estão definidas as funções e responsabilidades na tua equipa?", options: [
+      { letter: "A", text: "Claramente definidas — toda a gente sabe exatamente o que é de cada um", score: 4 },
+      { letter: "B", text: "Maioritariamente claro, com algumas zonas cinzentas", score: 3 },
+      { letter: "C", text: "Muitas vezes pouco claro — as coisas ficam por fazer", score: 2 },
+      { letter: "D", text: "Sem responsabilidade clara — tudo passa por uma pessoa", score: 1 }
+    ]},
+    { area: 2, text: "Quando surge um problema recorrente, como é tratado?", options: [
+      { letter: "A", text: "A causa raiz é identificada e resolvida permanentemente", score: 4 },
+      { letter: "B", text: "Uma solução é aplicada, mas o problema pode voltar", score: 3 },
+      { letter: "C", text: "A mesma pessoa resolve sempre que acontece", score: 2 },
+      { letter: "D", text: "É contornado — nunca verdadeiramente resolvido", score: 1 }
+    ]},
+    { area: 2, text: "Como é transferido o conhecimento de colaboradores experientes para novos membros?", options: [
+      { letter: "A", text: "Através de materiais estruturados e processos documentados", score: 4 },
+      { letter: "B", text: "Colaboradores experientes mostram informalmente", score: 3 },
+      { letter: "C", text: "Tentativa e erro — descobrem sozinhos", score: 2 },
+      { letter: "D", text: "Conhecimento crítico está na cabeça de uma ou duas pessoas", score: 1 }
+    ]},
+    { area: 3, text: "Como medes o desempenho do teu processo principal?", options: [
+      { letter: "A", text: "KPIs claros, monitorados regularmente e com ações associadas", score: 4 },
+      { letter: "B", text: "Algum acompanhamento, mas não sistemático", score: 3 },
+      { letter: "C", text: "Notamos quando algo corre mal", score: 2 },
+      { letter: "D", text: "Sem medição formal em vigor", score: 1 }
+    ]},
+    { area: 3, text: "Qual é a consistência da qualidade do teu produto ou serviço?", options: [
+      { letter: "A", text: "Muito consistente — os clientes raramente levantam problemas", score: 4 },
+      { letter: "B", text: "Geralmente boa, com problemas ocasionais", score: 3 },
+      { letter: "C", text: "Varia visivelmente consoante quem faz o trabalho", score: 2 },
+      { letter: "D", text: "Inconsistente — reclamações ou retrabalho são comuns", score: 1 }
+    ]},
+    { area: 3, text: "Quando implementas uma melhoria de processo, o que acontece normalmente a seguir?", options: [
+      { letter: "A", text: "Mantém-se — documentamos e formamos a equipa", score: 4 },
+      { letter: "B", text: "Funciona por um tempo, depois vai desaparecendo gradualmente", score: 3 },
+      { letter: "C", text: "Melhorias são discutidas mas raramente implementadas", score: 2 },
+      { letter: "D", text: "Continuamos a fazer as coisas da mesma forma", score: 1 }
+    ]}
+  ]
+};
+
+// ===== MULTILINGUAL AREAS =====
+const AREAS = {
+  en: [
+    { name: "Process & Flow", description: "How clearly your work is defined, documented and handed over.", recommendations: {
+      strong:    "Your processes are solid. Keep the documentation current and run a periodic VSM to spot drift.",
+      attention: "Some processes work, others rely on people. A Value Stream Map will show you exactly where flow breaks down.",
+      priority:  "Your operations depend too heavily on individuals. A VSM Mapping or Kaizen Event will build the structure you need.",
+      critical:  "Without documented processes, everything runs on heroics. The VSM Mapping package is the right starting point."
+    }, service: "VSM Mapping" },
+    { name: "Space & Organisation", description: "Whether your physical and digital environment supports or slows the work.", recommendations: {
+      strong:    "Your workspace supports the team. Revisit 5S principles seasonally to keep it sharp.",
+      attention: "Organisation is mostly there. A focused 5S session on one area will set the standard for the rest.",
+      priority:  "Disorganisation is costing time daily. A 5S Workspace intervention will create order that lasts.",
+      critical:  "Your environment is a daily tax on productivity. The 5S Workspace package is designed exactly for this."
+    }, service: "5S Workspace" },
+    { name: "People & Knowledge", description: "How well your team is aligned, capable and empowered to act.", recommendations: {
+      strong:    "Your team is well-structured. A periodic Kaizen keeps the culture of improvement alive.",
+      attention: "Knowledge gaps and unclear ownership are slowing you down. A Kaizen Event will surface and fix the key ones.",
+      priority:  "Your team is capable but under-supported. Structured role clarity and a Kaizen Event will unlock them.",
+      critical:  "Knowledge and ownership are bottlenecked. This is often the root cause of all other problems. A Transformation engagement starts here."
+    }, service: "Kaizen Event" },
+    { name: "Results & Measurement", description: "Whether your business runs on data or on gut feeling.", recommendations: {
+      strong:    "You measure what matters. Make sure improvements loop back into your KPIs.",
+      attention: "You have some visibility. Formalising your KPIs will help you catch problems earlier and prove what's working.",
+      priority:  "Without measurement, improvement is guesswork. A structured KPI framework is a key part of any engagement.",
+      critical:  "Flying blind is expensive. The Transformation package includes a full measurement system built around your core processes."
+    }, service: "Transformation" }
+  ],
+
+  de: [
+    { name: "Prozess & Ablauf", description: "Wie klar deine Arbeit definiert, dokumentiert und übergeben wird.", recommendations: {
+      strong:    "Deine Prozesse sind solide. Halte die Dokumentation aktuell und führe regelmäßig ein VSM durch, um Abweichungen zu erkennen.",
+      attention: "Manche Prozesse funktionieren, andere hängen von Personen ab. Eine Value Stream Map zeigt dir genau, wo der Ablauf stockt.",
+      priority:  "Deine Abläufe hängen zu stark von Einzelpersonen ab. Ein VSM-Mapping oder Kaizen-Event schafft die nötige Struktur.",
+      critical:  "Ohne dokumentierte Prozesse läuft alles auf Heroismus hinaus. Das VSM-Mapping-Paket ist der richtige Startpunkt."
+    }, service: "VSM Mapping" },
+    { name: "Raum & Organisation", description: "Ob deine physische und digitale Umgebung die Arbeit unterstützt oder verlangsamt.", recommendations: {
+      strong:    "Dein Arbeitsbereich unterstützt das Team. Überprüfe 5S-Prinzipien saisonal, um den Standard zu halten.",
+      attention: "Die Organisation ist meist vorhanden. Eine fokussierte 5S-Session in einem Bereich setzt den Standard für den Rest.",
+      priority:  "Desorganisation kostet täglich Zeit. Ein 5S-Workspace-Eingriff schafft dauerhaft Ordnung.",
+      critical:  "Deine Umgebung ist eine tägliche Produktivitätsbremse. Das 5S-Workspace-Paket ist genau dafür konzipiert."
+    }, service: "5S Workspace" },
+    { name: "Menschen & Wissen", description: "Wie gut dein Team ausgerichtet, befähigt und handlungsfähig ist.", recommendations: {
+      strong:    "Dein Team ist gut aufgestellt. Ein regelmäßiges Kaizen hält die Verbesserungskultur am Leben.",
+      attention: "Wissenslücken und unklare Zuständigkeiten bremsen dich. Ein Kaizen-Event deckt die wichtigsten auf und behebt sie.",
+      priority:  "Dein Team ist fähig, aber zu wenig unterstützt. Klare Rollenstruktur und ein Kaizen-Event werden es entfalten.",
+      critical:  "Wissen und Zuständigkeiten sind verstopft. Das ist oft die Wurzel aller anderen Probleme. Ein Transformations-Engagement beginnt hier."
+    }, service: "Kaizen Event" },
+    { name: "Ergebnisse & Messung", description: "Ob dein Unternehmen auf Daten oder Bauchgefühl basiert.", recommendations: {
+      strong:    "Du misst, was zählt. Stelle sicher, dass Verbesserungen in deine KPIs zurückfließen.",
+      attention: "Du hast etwas Sichtbarkeit. Die Formalisierung deiner KPIs hilft dir, Probleme früher zu erkennen und nachzuweisen, was funktioniert.",
+      priority:  "Ohne Messung ist Verbesserung Rätselraten. Ein strukturiertes KPI-Framework ist Teil jedes Engagements.",
+      critical:  "Im Blindflug zu fliegen ist teuer. Das Transformations-Paket umfasst ein vollständiges Messsystem für deine Kernprozesse."
+    }, service: "Transformation" }
+  ],
+
+  pt: [
+    { name: "Processo & Fluxo", description: "Quão claramente o teu trabalho está definido, documentado e entregue.", recommendations: {
+      strong:    "Os teus processos são sólidos. Mantém a documentação atualizada e faz um VSM periódico para detetar desvios.",
+      attention: "Alguns processos funcionam, outros dependem de pessoas. Um Value Stream Map mostrará exatamente onde o fluxo para.",
+      priority:  "As tuas operações dependem demasiado de indivíduos. Um VSM Mapping ou Kaizen Event irá construir a estrutura que precisas.",
+      critical:  "Sem processos documentados, tudo funciona por heroísmo. O pacote VSM Mapping é o ponto de partida certo."
+    }, service: "VSM Mapping" },
+    { name: "Espaço & Organização", description: "Se o teu ambiente físico e digital apoia ou atrasa o trabalho.", recommendations: {
+      strong:    "O teu espaço de trabalho apoia a equipa. Revê os princípios 5S sazonalmente para manter o standard.",
+      attention: "A organização está maioritariamente lá. Uma sessão 5S focada numa área definirá o standard para o resto.",
+      priority:  "A desorganização está a custar tempo diariamente. Uma intervenção 5S Workspace criará ordem que dura.",
+      critical:  "O teu ambiente é um imposto diário à produtividade. O pacote 5S Workspace foi desenhado exatamente para isto."
+    }, service: "5S Workspace" },
+    { name: "Pessoas & Conhecimento", description: "Quão bem a tua equipa está alinhada, capacitada e com poder de agir.", recommendations: {
+      strong:    "A tua equipa está bem estruturada. Um Kaizen periódico mantém a cultura de melhoria viva.",
+      attention: "Lacunas de conhecimento e responsabilidades pouco claras estão a atrasar-te. Um Kaizen Event identificará e resolverá as mais importantes.",
+      priority:  "A tua equipa é capaz mas pouco apoiada. Clareza de funções estruturada e um Kaizen Event irão libertá-la.",
+      critical:  "Conhecimento e responsabilidade estão bloqueados. Esta é frequentemente a causa raiz de todos os outros problemas. Um engagement Transformation começa aqui."
+    }, service: "Kaizen Event" },
+    { name: "Resultados & Medição", description: "Se o teu negócio funciona com base em dados ou em intuição.", recommendations: {
+      strong:    "Medes o que importa. Certifica-te de que as melhorias voltam a entrar nos teus KPIs.",
+      attention: "Tens alguma visibilidade. Formalizar os teus KPIs ajudará a detetar problemas mais cedo e a provar o que funciona.",
+      priority:  "Sem medição, a melhoria é tentativa. Uma framework estruturada de KPIs é parte essencial de qualquer engagement.",
+      critical:  "Voar às cegas é caro. O pacote Transformation inclui um sistema de medição completo construído em torno dos teus processos principais."
+    }, service: "Transformation" }
+  ]
+};
+
+// ===== MULTILINGUAL PACKAGES =====
+const PACKAGES = {
+  en: {
+    '5s': {
+      tag: 'FLOW 2x · 2 DAYS', name: '5S Workspace',
+      subtitle: 'Sort. Set. Shine. Standardise. Sustain.',
+      price: '1,200', note: '+ CHF 500 / extra day',
+      why: 'Your main drag is physical and digital disorganisation. Two focused on-site days will build a structure your team can actually maintain — with standards documented, everyone trained, and a 30-day check-in to make sure it sticks.'
+    },
+    'vsm': {
+      tag: 'FLOW 3x · 3 DAYS', name: 'VSM Mapping',
+      subtitle: 'See the whole flow. Find where value leaks.',
+      price: '1,800', note: '+ CHF 500 / extra day',
+      why: 'Your processes aren\'t fully visible — which means you\'re making decisions without seeing the whole picture. Three days to map your current and future state, identify the quick wins, and build a 90-day roadmap you can actually execute.'
+    },
+    'kaizen': {
+      tag: 'FLOW 5x · 5 DAYS', name: 'Kaizen Event',
+      subtitle: 'A full week of focused improvement.',
+      price: '3,000', note: '+ CHF 500 / extra day',
+      why: 'Several areas are holding you back at once. A focused week working inside your team — mapping the state, identifying root causes, redesigning the flow — will deliver real, measurable change. Not a report. Actual improvement.'
+    },
+    'transformation': {
+      tag: 'FLOW 12x · 4–6 WEEKS', name: 'Transformation',
+      subtitle: 'An embedded engagement that changes how the company runs.',
+      price: '9,800', note: '12 days spread over 4–6 weeks',
+      why: 'The issues run deep and touch multiple areas of the business. Surface-level fixes won\'t hold. This is a full embedded engagement — diagnostic, process redesign across your core flows, team capability building, and a 12-month review cycle.'
+    }
+  },
+
+  de: {
+    '5s': {
+      tag: 'FLOW 2x · 2 TAGE', name: '5S Workspace',
+      subtitle: 'Sortieren. Ordnen. Sauber halten. Standardisieren. Aufrechterhalten.',
+      price: '1.200', note: '+ CHF 500 / weiterer Tag',
+      why: 'Dein größtes Hemmnis ist physische und digitale Desorganisation. Zwei fokussierte Tage vor Ort schaffen eine Struktur, die dein Team wirklich pflegen kann — mit dokumentierten Standards, allen Beteiligten geschult und einem 30-Tage-Check-in, der sicherstellt, dass es hält.'
+    },
+    'vsm': {
+      tag: 'FLOW 3x · 3 TAGE', name: 'VSM Mapping',
+      subtitle: 'Den gesamten Ablauf sehen. Finden, wo Wert verloren geht.',
+      price: '1.800', note: '+ CHF 500 / weiterer Tag',
+      why: 'Deine Prozesse sind nicht vollständig sichtbar — das heißt, du triffst Entscheidungen ohne das ganze Bild zu sehen. Drei Tage, um deinen Ist- und Soll-Zustand zu kartieren, Quick Wins zu identifizieren und eine 90-Tage-Roadmap zu erstellen, die du wirklich umsetzen kannst.'
+    },
+    'kaizen': {
+      tag: 'FLOW 5x · 5 TAGE', name: 'Kaizen Event',
+      subtitle: 'Eine ganze Woche fokussierter Verbesserung.',
+      price: '3.000', note: '+ CHF 500 / weiterer Tag',
+      why: 'Mehrere Bereiche bremsen dich gleichzeitig. Eine fokussierte Woche innerhalb deines Teams — Ist-Zustand kartieren, Ursachen finden, den Ablauf neu gestalten — liefert echte, messbare Veränderung. Kein Bericht. Echte Verbesserung.'
+    },
+    'transformation': {
+      tag: 'FLOW 12x · 4–6 WOCHEN', name: 'Transformation',
+      subtitle: 'Ein eingebettetes Engagement, das verändert, wie das Unternehmen läuft.',
+      price: '9.800', note: '12 Tage über 4–6 Wochen verteilt',
+      why: 'Die Probleme liegen tief und betreffen mehrere Bereiche des Unternehmens. Oberflächliche Korrekturen halten nicht. Das ist ein vollständiges eingebettetes Engagement — Diagnose, Prozessneugestaltung, Teamkompetenzaufbau und ein 12-Monats-Reviewzyklus.'
+    }
+  },
+
+  pt: {
+    '5s': {
+      tag: 'FLOW 2x · 2 DIAS', name: '5S Workspace',
+      subtitle: 'Separar. Organizar. Limpar. Padronizar. Sustentar.',
+      price: '1.200', note: '+ CHF 500 / dia extra',
+      why: 'O teu principal obstáculo é a desorganização física e digital. Dois dias focados no local criarão uma estrutura que a tua equipa consegue realmente manter — com standards documentados, toda a gente formada e um check-in aos 30 dias para garantir que se mantém.'
+    },
+    'vsm': {
+      tag: 'FLOW 3x · 3 DIAS', name: 'VSM Mapping',
+      subtitle: 'Ver todo o fluxo. Encontrar onde o valor se perde.',
+      price: '1.800', note: '+ CHF 500 / dia extra',
+      why: 'Os teus processos não estão totalmente visíveis — o que significa que estás a tomar decisões sem ver o quadro completo. Três dias para mapear o estado atual e futuro, identificar as quick wins e construir um roadmap de 90 dias que podes realmente executar.'
+    },
+    'kaizen': {
+      tag: 'FLOW 5x · 5 DIAS', name: 'Kaizen Event',
+      subtitle: 'Uma semana completa de melhoria focada.',
+      price: '3.000', note: '+ CHF 500 / dia extra',
+      why: 'Várias áreas estão a travar-te ao mesmo tempo. Uma semana focada dentro da tua equipa — mapear o estado, identificar causas raiz, redesenhar o fluxo — vai gerar mudança real e mensurável. Não um relatório. Melhoria concreta.'
+    },
+    'transformation': {
+      tag: 'FLOW 12x · 4–6 SEMANAS', name: 'Transformation',
+      subtitle: 'Um engagement integrado que muda como a empresa funciona.',
+      price: '9.800', note: '12 dias distribuídos por 4–6 semanas',
+      why: 'Os problemas são profundos e tocam múltiplas áreas do negócio. Correções superficiais não resistem. Este é um engagement totalmente integrado — diagnóstico, redesenho de processos, desenvolvimento de capacidades da equipa e um ciclo de revisão de 12 meses.'
+    }
+  }
+};
+
+// ===== UI STRINGS =====
+const UI = {
+  en: {
+    questionOf: (n, t) => `Question ${n} of ${t}`,
+    countOf:    (n, t) => `${n} / ${t}`,
+    next:        'Next',
+    seeResults:  'See my results',
+    back:        'Back',
+    wasteBadge:  'WASTE SPOT',
+    scoreLabels: { strong: 'Strong', attention: 'Needs attention', priority: 'High priority', critical: 'Critical' },
+    recEyebrow:  'Based on your results',
+    recTitle:    "Here's where to start.",
+    recBadge:    'RECOMMENDED FOR YOU'
+  },
+  de: {
+    questionOf: (n, t) => `Frage ${n} von ${t}`,
+    countOf:    (n, t) => `${n} / ${t}`,
+    next:        'Weiter',
+    seeResults:  'Meine Ergebnisse sehen',
+    back:        'Zurück',
+    wasteBadge:  'SCHWACHSTELLE',
+    scoreLabels: { strong: 'Stark', attention: 'Verbesserungsbedarf', priority: 'Hohe Priorität', critical: 'Kritisch' },
+    recEyebrow:  'Basierend auf deinen Ergebnissen',
+    recTitle:    'Hier ist dein Startpunkt.',
+    recBadge:    'EMPFOHLEN FÜR DICH'
+  },
+  pt: {
+    questionOf: (n, t) => `Pergunta ${n} de ${t}`,
+    countOf:    (n, t) => `${n} / ${t}`,
+    next:        'Próximo',
+    seeResults:  'Ver os meus resultados',
+    back:        'Voltar',
+    wasteBadge:  'PONTO FRACO',
+    scoreLabels: { strong: 'Forte', attention: 'Precisa de atenção', priority: 'Alta prioridade', critical: 'Crítico' },
+    recEyebrow:  'Com base nos teus resultados',
+    recTitle:    'Por onde começar.',
+    recBadge:    'RECOMENDADO PARA TI'
+  }
+};
+
+// ⚠️  SETUP: Replace with your Formspree form ID
+const FORMSPREE_ID = 'YOUR_FORMSPREE_ID';
+
+let currentQ = 0;
+let answers = new Array(12).fill(null);
+let currentScores = [0, 0, 0, 0];
+
+// ===== LANGUAGE HELPERS =====
+function getLang() {
+  return document.documentElement.dataset.lang || 'en';
+}
+
+function setLang(lang) {
+  document.documentElement.dataset.lang = lang;
+  document.documentElement.lang = lang;
+  localStorage.setItem('subtil-lang', lang);
+  updatePlaceholders(lang);
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.setLang === lang);
+  });
+  // Re-render question page if active
+  if (document.getElementById('page-question').classList.contains('active')) {
+    renderQuestion();
+  }
+  // Re-render results if active
+  if (document.getElementById('page-results').classList.contains('active')) {
+    showResults();
+  }
+}
+
+function updatePlaceholders(lang) {
+  document.querySelectorAll('input[data-placeholder-en]').forEach(i => {
+    if (lang === 'de') i.placeholder = i.dataset.placeholderDe || '';
+    else if (lang === 'pt') i.placeholder = i.dataset.placeholderPt || '';
+    else i.placeholder = i.dataset.placeholderEn || '';
+  });
+}
+
+// ===== RECOMMENDATION LOGIC =====
+function getRecommendation(scores) {
+  const [proc, space, people, results] = scores;
+  const total        = scores.reduce((a, b) => a + b, 0);
+  const criticalCount = scores.filter(s => s <= 4).length;
+  const weakCount    = scores.filter(s => s < 7).length;
+  const lowestScore  = Math.min(...scores);
+  const lowestArea   = scores.indexOf(lowestScore);
+
+  if (criticalCount >= 2 || total <= 20 || weakCount >= 3) return 'transformation';
+  if (weakCount >= 2) return 'kaizen';
+  if (lowestArea === 0 && proc < 9)   return 'vsm';
+  if (lowestArea === 1 && space < 9)  return '5s';
+  if (lowestArea === 2) return 'kaizen';
+  if (lowestArea === 3) return 'vsm';
+  return 'vsm';
+}
+
+// ===== PAGE CONTROL =====
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startAudit() {
+  currentQ = 0;
+  answers = new Array(12).fill(null);
+  renderQuestion();
+  showPage('page-question');
+}
+
+function renderQuestion() {
+  const lang = getLang();
+  const questions = QUESTIONS[lang];
+  const areas = AREAS[lang];
+  const ui = UI[lang];
+  const q = questions[currentQ];
+  const total = questions.length;
+  const pct = ((currentQ) / total * 100).toFixed(0);
+
+  document.getElementById('q-area-label').textContent  = areas[q.area].name;
+  document.getElementById('q-count-label').textContent = ui.countOf(currentQ + 1, total);
+  document.getElementById('q-progress-label').textContent = ui.questionOf(currentQ + 1, total);
+  document.getElementById('progress-fill').style.width = Math.max(8, pct) + '%';
+  document.getElementById('q-number').textContent = String(currentQ + 1).padStart(2, '0');
+  document.getElementById('q-text').textContent = q.text;
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option' + (answers[currentQ] === i ? ' selected' : '');
+    btn.innerHTML = `<span class="option-letter">${opt.letter}</span><span>${opt.text}</span>`;
+    btn.addEventListener('click', () => selectOption(i));
+    container.appendChild(btn);
+  });
+
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.disabled = answers[currentQ] === null;
+  document.getElementById('btn-next-label').textContent = currentQ === total - 1 ? ui.seeResults : ui.next;
+  const backBtn = document.getElementById('btn-back');
+  backBtn.textContent = ui.back;
+  backBtn.style.display = currentQ === 0 ? 'none' : 'inline-flex';
+}
+
+function selectOption(idx) {
+  answers[currentQ] = idx;
+  document.querySelectorAll('.option').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === idx);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === null) return;
+  const lang = getLang();
+  if (currentQ < QUESTIONS[lang].length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+  else { showPage('page-intro'); }
+}
+
+function showResults() {
+  const lang = getLang();
+  const questions = QUESTIONS[lang];
+  const areas = AREAS[lang];
+  const packages = PACKAGES[lang];
+  const ui = UI[lang];
+
+  const scores = [0, 0, 0, 0];
+  questions.forEach((q, i) => {
+    if (answers[i] !== null) scores[q.area] += q.options[answers[i]].score;
+  });
+  currentScores = [...scores];
+
+  const ranked = scores.map((s, i) => ({ area: i, score: s })).sort((a, b) => a.score - b.score);
+  const weakSet = new Set(ranked.slice(0, 3).map(r => r.area));
+
+  const container = document.getElementById('area-results');
+  container.innerHTML = '';
+
+  scores.forEach((score, i) => {
+    const isWeak = weakSet.has(i);
+    let tier;
+    if (score >= 10)     tier = 'strong';
+    else if (score >= 7) tier = 'attention';
+    else if (score >= 5) tier = 'priority';
+    else                 tier = 'critical';
+
+    const label = ui.scoreLabels[tier];
+    const pct = ((score / 12) * 100).toFixed(0);
+    const rec = areas[i].recommendations[tier];
+
+    const div = document.createElement('div');
+    div.className = 'area-result' + (isWeak ? ' weak' : '');
+    div.innerHTML = `
+      ${isWeak ? `<div class="weak-badge">${ui.wasteBadge}</div>` : ''}
+      <div class="area-result-top">
+        <div class="area-result-name">${areas[i].name}</div>
+        <div class="area-score-label score-${tier}">${label}</div>
+      </div>
+      <div class="area-bar"><div class="area-bar-fill fill-${tier}" style="width:0%" data-pct="${pct}"></div></div>
+      <p class="area-recommendation">${rec}</p>
+    `;
+    container.appendChild(div);
+  });
+
+  const recKey = getRecommendation(scores);
+  const pkg = packages[recKey];
+  document.getElementById('package-recommendation').innerHTML = `
+    <div class="rec-intro-eyebrow">${ui.recEyebrow}</div>
+    <p class="rec-intro-title">${ui.recTitle}</p>
+    <div class="rec-card">
+      <div class="rec-badge">${ui.recBadge}</div>
+      <div class="rec-tag">${pkg.tag}</div>
+      <div class="rec-name">${pkg.name}</div>
+      <p class="rec-subtitle">${pkg.subtitle}</p>
+      <p class="rec-why">${pkg.why}</p>
+      <div class="rec-price"><span class="rec-currency">CHF</span>${pkg.price}</div>
+      <p class="rec-price-note">${pkg.note}</p>
+    </div>
+  `;
+
+  showPage('page-results');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.area-bar-fill').forEach(el => {
+        el.style.width = el.dataset.pct + '%';
+      });
+    });
+  });
+}
+
+function retake() {
+  currentQ = 0;
+  answers = new Array(12).fill(null);
+  const form = document.getElementById('results-form');
+  const success = document.getElementById('capture-success');
+  const btn = document.getElementById('capture-submit-btn');
+  if (form)    { form.style.display = ''; form.reset(); }
+  if (success) success.style.display = 'none';
+  if (btn)     { btn.disabled = false; btn.style.opacity = '1'; }
+  renderQuestion();
+  showPage('page-question');
+}
+
+async function submitResults(e) {
+  e.preventDefault();
+  const lang  = getLang();
+  const name  = document.getElementById('capture-name').value.trim() || 'Anonymous';
+  const email = document.getElementById('capture-email').value.trim();
+  const btn   = document.getElementById('capture-submit-btn');
+
+  const areaNames = AREAS[lang].map(a => a.name);
+  const total  = currentScores.reduce((a, b) => a + b, 0);
+  const recKey = getRecommendation(currentScores);
+  const pkg    = PACKAGES[lang][recKey];
+  const scoreBreakdown = areaNames.map((n, i) => `${n}: ${currentScores[i]}/12`).join(' | ');
+
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _subject: `New subtil. Audit — ${name} — Recommended: ${pkg.name}`,
+        name, email,
+        recommended_package: pkg.name,
+        total_score: `${total}/48`,
+        score_breakdown: scoreBreakdown,
+        language: lang.toUpperCase(),
+        date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+      })
+    });
+    if (res.ok) {
+      document.getElementById('results-form').style.display = 'none';
+      document.getElementById('capture-success').style.display = 'flex';
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    const msg = lang === 'de'
+      ? 'Etwas ist schiefgelaufen. Bitte versuch es erneut.'
+      : lang === 'pt'
+      ? 'Algo correu mal. Por favor tenta novamente.'
+      : 'Something went wrong. Please try again.';
+    alert(msg);
+  }
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  // Wire up all language buttons (all 3 nav bars)
+  document.querySelectorAll('[data-set-lang]').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.setLang));
+  });
+
+  // Restore language from main site or default to EN
+  const saved = localStorage.getItem('subtil-lang') || 'en';
+  setLang(saved);
+});
+</script>
+</body>
+</html>
