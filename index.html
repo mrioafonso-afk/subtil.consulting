@@ -725,8 +725,21 @@
     font-size: clamp(60px, 12vw, 110px);
     font-weight: 700;
     color: var(--paper);
-    opacity: 0.06;
+    opacity: 0.22;
     letter-spacing: 0.05em;
+  }
+  .about-portrait::after {
+    content: 'AFONSO';
+    position: absolute;
+    top: calc(50% + clamp(52px, 10vw, 92px));
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 300;
+    color: var(--paper);
+    opacity: 0.18;
+    letter-spacing: 0.45em;
   }
   .about-portrait .mark-deco {
     position: absolute;
