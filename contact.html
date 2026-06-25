@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>subtil. — Contact Mario Afonso</title>
+<meta name="description" content="Book a free 30-minute call with Mario Afonso. Lean Six Sigma consulting based in Switzerland. Honest conversation, no pitch.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #141413;
+    --paper: #faf9f5;
+    --paper-soft: #f4f2ea;
+    --mid-gray: #b0aea5;
+    --light-gray: #e8e6dc;
+    --signal: #d97757;
+    --process: #6a9bcc;
+    --outcome: #788c5d;
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Lora', Georgia, serif;
+    --container-max: 1200px;
+    --section-y: clamp(64px, 9vw, 120px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px);
+  }
+
+  /* ===== Stack mark ===== */
+  .stack-mark {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 28px;
+  }
+  .stack-mark span {
+    display: block;
+    height: 6px;
+    width: 100%;
+    border-radius: 1px;
+  }
+  .stack-mark span:nth-child(1) { background: var(--outcome); }
+  .stack-mark span:nth-child(2) { background: var(--process); }
+  .stack-mark span:nth-child(3) { background: var(--signal); }
+
+  /* ===== Header ===== */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(20, 20, 19, 0.92);
+    color: var(--paper);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s ease;
+  }
+  .site-header.scrolled { border-bottom-color: rgba(255,255,255,0.1); }
+
+  .nav-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--paper);
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .nav-link {
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--paper);
+    opacity: 0.75;
+    transition: opacity .2s, color .2s;
+  }
+  .nav-link:hover { opacity: 1; color: var(--signal); }
+  .nav-link.active { opacity: 1; color: var(--signal); }
+  .nav-cta {
+    background: var(--signal);
+    color: var(--ink);
+    padding: 11px 22px;
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background .2s;
+    opacity: 1;
+  }
+  .nav-cta:hover { background: #c46847; color: var(--ink); opacity: 1; }
+  .nav-audit {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--signal);
+    border: 1px solid var(--signal);
+    padding: 6px 13px;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+  .nav-audit:hover { background: var(--signal); color: var(--ink); }
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    margin-left: 8px;
+  }
+  .lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 4px;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--paper);
+    opacity: 0.5;
+    transition: opacity .2s;
+    font-weight: 600;
+  }
+  .lang-btn:hover { opacity: 1; }
+  .lang-btn.active { opacity: 1; color: var(--signal); }
+  .lang-sep { opacity: 0.3; padding-top: 6px; color: var(--paper); }
+
+  @media (max-width: 900px) {
+    .nav-links { gap: 14px; }
+    .nav-link:not(.nav-cta) { display: none; }
+  }
+  @media (max-width: 480px) {
+    .nav-cta { display: none; }
+    .brand { font-size: 15px; }
+    .stack-mark { width: 22px; }
+    .stack-mark span { height: 5px; }
+  }
+
+  /* ===== Language ===== */
+  [data-lang="en"] .de-only, [data-lang="en"] .pt-only { display: none; }
+  [data-lang="de"] .en-only, [data-lang="de"] .pt-only { display: none; }
+  [data-lang="pt"] .en-only, [data-lang="pt"] .de-only { display: none; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 160px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 720px;
+    height: 720px;
+    background: radial-gradient(circle, rgba(217,119,87,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-size: clamp(44px, 8vw, 100px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero-title .accent { color: var(--signal); }
+  .hero-desc {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    color: var(--mid-gray);
+    max-width: 580px;
+    line-height: 1.55;
+  }
+
+  /* ===== Two-col layout ===== */
+  .contact-section {
+    padding: 80px 0 var(--section-y);
+    flex: 1;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 56px; }
+  }
+
+  /* ===== Contact info ===== */
+  .info-block {
+    margin-bottom: 40px;
+  }
+  .info-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .info-value {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--paper);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .info-value a {
+    color: var(--signal);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .info-value a:hover { border-bottom-color: var(--signal); }
+  .info-value .redacted {
+    color: var(--mid-gray);
+    letter-spacing: 0.1em;
+  }
+
+  .location-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .location-tag {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid-gray);
+  }
+
+  /* ===== Form card ===== */
+  .form-card {
+    background: #1c1b1a;
+    border: 1px solid #2c2b2a;
+    padding: 48px 40px 40px;
+  }
+  @media (max-width: 480px) { .form-card { padding: 32px 24px 28px; } }
+  .form-heading {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--paper);
+  }
+  .form-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mid-gray);
+    margin-bottom: 36px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--mid-gray);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .form-input {
+    width: 100%;
+    background: var(--ink);
+    border: 1px solid #2c2b2a;
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 14px 16px;
+    border-radius: 1px;
+    transition: border-color .2s;
+    outline: none;
+    appearance: none;
+  }
+  .form-input::placeholder { color: #4a4946; }
+  .form-input:focus { border-color: var(--signal); }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--signal);
+    color: var(--ink);
+    padding: 18px 24px;
+    border: none;
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { background: #c46847; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+
+  .audit-nudge {
+    margin-top: 20px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--mid-gray);
+    text-align: center;
+  }
+  .audit-nudge a {
+    color: var(--mid-gray);
+    text-decoration: none;
+    border-bottom: 1px solid #3a3937;
+    padding-bottom: 1px;
+    transition: color .2s, border-color .2s;
+  }
+  .audit-nudge a:hover { color: var(--signal); border-color: var(--signal); }
+
+  /* ===== Divider ===== */
+  .section-divider {
+    height: 1px;
+    background: #2c2b2a;
+    margin: 0;
+  }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    background: #0d0d0c;
+    border-top: 1px solid #2c2b2a;
+    padding: 28px 0;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--paper);
+  }
+  .footer-copy {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container">
+    <nav class="nav-wrap">
+      <a href="index.html" class="brand">
+        <span class="stack-mark"><span></span><span></span><span></span></span>
+        <span>subtil<span style="color:var(--signal)">.</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="methodology.html" class="nav-link"><span class="en-only">Methodology</span><span class="de-only">Methodik</span><span class="pt-only">Metodologia</span></a>
+        <a href="services.html" class="nav-link"><span class="en-only">Services</span><span class="de-only">Leistungen</span><span class="pt-only">Serviços</span></a>
+        <a href="at-home.html" class="nav-link"><span class="en-only">At Home</span><span class="de-only">Zuhause</span><span class="pt-only">Em Casa</span></a>
+        <a href="about.html" class="nav-link"><span class="en-only">About</span><span class="de-only">Über</span><span class="pt-only">Sobre</span></a>
+        <a href="audit.html" class="nav-audit"><span class="en-only">Free Audit</span><span class="de-only">Gratis Audit</span><span class="pt-only">Audit Grátis</span></a>
+        <a href="contact.html" class="nav-link nav-cta active"><span class="en-only">Talk with us</span><span class="de-only">Sprich mit uns</span><span class="pt-only">Fala connosco</span></a>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <span class="lang-sep">·</span>
+          <button class="lang-btn" data-set-lang="de">DE</button>
+          <span class="lang-sep">·</span>
+          <button class="lang-btn" data-set-lang="pt">PT</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">
+      <span class="en-only">Let's talk</span>
+      <span class="de-only">Lass uns reden</span>
+      <span class="pt-only">Vamos falar</span>
+    </p>
+    <h1 class="hero-title">
+      <span class="en-only">Diagnose.<br>Design.<br><span class="accent">Deliver.</span></span>
+      <span class="de-only">Diagnose.<br>Design.<br><span class="accent">Lieferung.</span></span>
+      <span class="pt-only">Diagnosticar.<br>Desenhar.<br><span class="accent">Entregar.</span></span>
+    </h1>
+    <p class="hero-desc">
+      <span class="en-only">A short, focused 30-minute call to understand your real bottlenecks and decide if subtil. is the right fit. No pitch, no pressure — just an honest conversation.</span>
+      <span class="de-only">Ein kurzes, fokussiertes 30-minütiges Gespräch, um Ihre echten Engpässe zu verstehen und zu entscheiden, ob subtil. das Richtige für Sie ist. Kein Verkaufsgespräch, kein Druck — nur eine ehrliche Unterhaltung.</span>
+      <span class="pt-only">Uma chamada curta e focada de 30 minutos para entender os seus verdadeiros estrangulamentos e decidir se subtil. é a escolha certa. Sem pitch, sem pressão — apenas uma conversa honesta.</span>
+    </p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: Info -->
+      <div>
+        <div class="info-block">
+          <p class="info-label">EMAIL</p>
+          <p class="info-value"><a href="mailto:mario@subtil.ch">mario@subtil.ch</a></p>
+        </div>
+        <div class="info-block">
+          <p class="info-label">PHONE</p>
+          <p class="info-value"><span class="redacted">+41 — — —</span></p>
+        </div>
+        <div class="info-block">
+          <p class="info-label">BASE</p>
+          <div class="location-row">
+            <p class="info-value">Villigen, Aargau · Switzerland</p>
+            <p class="info-value">Sesimbra, Setúbal · Portugal</p>
+          </div>
+        </div>
+        <div class="info-block">
+          <p class="info-label">
+            <span class="en-only">SERVES</span>
+            <span class="de-only">EINSATZGEBIET</span>
+            <span class="pt-only">ONDE ACTUA</span>
+          </p>
+          <div class="location-row">
+            <p class="location-tag">CH · LI — Zürich · Zug · Luzern · Aargau · Liechtenstein</p>
+            <p class="location-tag">PT — Lisboa · Cascais · Margem Sul</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div>
+        <div class="form-card">
+          <h2 class="form-heading">
+            <span class="en-only">Book your call</span>
+            <span class="de-only">Termin buchen</span>
+            <span class="pt-only">Marcar a chamada</span>
+          </h2>
+          <p class="form-sub">
+            <span class="en-only">A reply within 24 hours, guaranteed.</span>
+            <span class="de-only">Eine Antwort innerhalb von 24 Stunden, garantiert.</span>
+            <span class="pt-only">Resposta em 24 horas, garantido.</span>
+          </p>
+
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label class="form-label" for="name">
+                <span class="en-only">Your name</span>
+                <span class="de-only">Ihr Name</span>
+                <span class="pt-only">O seu nome</span>
+              </label>
+              <input
+                class="form-input"
+                type="text"
+                id="name"
+                name="name"
+                required
+                data-placeholder-en="Your full name"
+                data-placeholder-de="Ihr vollständiger Name"
+                data-placeholder-pt="O seu nome completo"
+                placeholder="Your full name"
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">
+                <span class="en-only">Email</span>
+                <span class="de-only">E-Mail</span>
+                <span class="pt-only">Email</span>
+              </label>
+              <input
+                class="form-input"
+                type="email"
+                id="email"
+                name="email"
+                required
+                data-placeholder-en="your@email.com"
+                data-placeholder-de="ihre@email.com"
+                data-placeholder-pt="o.seu@email.com"
+                placeholder="your@email.com"
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="company">
+                <span class="en-only">Company <span style="opacity:0.5;font-weight:400">(optional)</span></span>
+                <span class="de-only">Unternehmen <span style="opacity:0.5;font-weight:400">(optional)</span></span>
+                <span class="pt-only">Empresa <span style="opacity:0.5;font-weight:400">(opcional)</span></span>
+              </label>
+              <input
+                class="form-input"
+                type="text"
+                id="company"
+                name="company"
+                data-placeholder-en="Your company or organisation"
+                data-placeholder-de="Ihr Unternehmen oder Ihre Organisation"
+                data-placeholder-pt="A sua empresa ou organização"
+                placeholder="Your company or organisation"
+              >
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span class="en-only">REQUEST CALL</span>
+              <span class="de-only">GESPRÄCH ANFRAGEN</span>
+              <span class="pt-only">PEDIR CHAMADA</span>
+            </button>
+          </form>
+
+          <p class="audit-nudge">
+            <span class="en-only">Prefer to start with data? <a href="audit.html">Try the Free Process Audit first.</a></span>
+            <span class="de-only">Lieber mit Daten starten? <a href="audit.html">Zuerst den kostenlosen Prozess-Audit ausprobieren.</a></span>
+            <span class="pt-only">Prefere começar com dados? <a href="audit.html">Experimente primeiro o Audit de Processo Grátis.</a></span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-brand">
+        <span class="stack-mark"><span></span><span></span><span></span></span>
+        <span>subtil<span style="color:var(--signal)">.</span></span>
+      </a>
+      <p class="footer-copy">
+        <span class="en-only">Sustainable by design. © 2026</span>
+        <span class="de-only">Nachhaltig by Design. © 2026</span>
+        <span class="pt-only">Sustentável por design. © 2026</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const lang = document.documentElement.dataset.lang || 'en';
+  const messages = {
+    en: "Thank you! I'll be in touch within 24 hours.",
+    de: "Vielen Dank! Ich melde mich innerhalb von 24 Stunden.",
+    pt: "Obrigado! Responderei em 24 horas."
+  };
+  alert(messages[lang] || messages.en);
+  e.target.reset();
+}
+
+function updatePlaceholders(lang) {
+  document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
+    el.placeholder = el.getAttribute('data-placeholder-' + lang);
+  });
+}
+
+function applyLang(lang) {
+  document.documentElement.lang = lang;
+  document.documentElement.dataset.lang = lang;
+  localStorage.setItem('subtil-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.setLang === lang));
+  updatePlaceholders(lang);
+}
+document.querySelectorAll('[data-set-lang]').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.setLang));
+});
+const savedLang = localStorage.getItem('subtil-lang');
+if (savedLang) {
+  applyLang(savedLang);
+} else {
+  applyLang((navigator.languages || [navigator.language || 'en']).map(l => l.toLowerCase().split('-')[0]).find(l => ['de','pt','en'].includes(l)) || 'en');
+}
+
+const header = document.getElementById('header');
+function updateHeader() { header.classList.toggle('scrolled', window.scrollY > 20); }
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+</script>
+</body>
+</html>
